@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'apparitaire') {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FasiChat — Apparitaire</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/dashboard/dashboard_apparitaire.css">
+<link rel="stylesheet" href="<?php echo css('dashboard_apparitaire'); ?>"
 </head>
 <body>
 <div class="sidebar">
@@ -31,14 +31,14 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'apparitaire') {
   </div>
   <div class="nav-section">
     <div class="nav-label-section">Navigation</div>
-    <div class="nav-item" onclick="location.href='valve.php'"><div class="nav-icon" style="background:rgba(99,102,241,0.08);">📣</div><div><div class="nl">Voir le Valve public</div><div class="ns">Vue utilisateur</div></div></div>
+    <div class="nav-item" onclick="location.href='<?php echo url("valve"); ?>'"><div class="nav-icon" style="background:rgba(99,102,241,0.08);">📣</div><div><div class="nl">Voir le Valve public</div><div class="ns">Vue utilisateur</div></div></div>
     <div class="nav-item" onclick="location.href='dashboard_admin.php'"><div class="nav-icon" style="background:rgba(220,38,38,0.08);">🏛</div><div><div class="nl">Espace Doyen</div><div class="ns">Administration</div></div></div>
-    <div class="nav-item" onclick="location.href='dashboard_etudiant.php'"><div class="nav-icon" style="background:rgba(79,163,224,0.08);">🎓</div><div><div class="nl">Vue Étudiant</div><div class="ns">Dashboard étudiant</div></div></div>
+    <div class="nav-item" onclick="location.href='<?php echo url("dashboard_etudiant"); ?>'"><div class="nav-icon" style="background:rgba(79,163,224,0.08);">🎓</div><div><div class="nl">Vue Étudiant</div><div class="ns">Dashboard étudiant</div></div></div>
   </div>
   <div class="sidebar-bottom">
     <div class="profile-ava"><div class="online-dot"></div>🗂</div>
     <div class="pi"><h4>DJ. ROLLY</h4><span>Apparitaire · Faculté</span></div>
-    <a href="logout.php" class="logout-btn">🚪</a>
+    <a href="<?php echo url('logout'); ?>" class="logout-btn">🚪</a>
   </div>
 </div>
 
@@ -49,7 +49,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'apparitaire') {
       <div class="topbar-sub">Faculté des Sciences Informatiques · Tableau d'affichage officiel</div>
     </div>
     <div class="topbar-right">
-      <button class="tb-btn ghost" onclick="location.href='valve.php'">👁 Voir le Valve</button>
+      <button class="tb-btn ghost" onclick="location.href='<?php echo url("valve"); ?>'">👁 Voir le Valve</button>
       <button class="tb-btn primary" onclick="openModal()">➕ Nouvelle annonce</button>
     </div>
   </div>
@@ -110,7 +110,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'apparitaire') {
         <div class="card">
           <div class="card-header">
             <div class="card-title">📋 Annonces publiées (6)</div>
-            <button class="card-action" onclick="location.href='valve.php'">Voir le Valve public →</button>
+            <button class="card-action" onclick="location.href='<?php echo url("valve"); ?>'">Voir le Valve public →</button>
           </div>
           <div class="annonces-list" id="annoncesList">
             <div class="annonce-item">
@@ -258,7 +258,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'apparitaire') {
           <div class="card-header"><div class="card-title">⚡ Actions rapides</div></div>
           <div style="padding:14px 16px;display:flex;flex-direction:column;gap:8px;">
             <button onclick="openModal()" style="width:100%;padding:10px 14px;background:linear-gradient(135deg,var(--indigo),#4f46e5);color:white;border:none;border-radius:10px;font-family:'Sora',sans-serif;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all 0.2s;">➕ Nouvelle annonce</button>
-            <button onclick="location.href='valve.php'" style="width:100%;padding:10px 14px;background:var(--gray-100);color:var(--navy);border:none;border-radius:10px;font-family:'Sora',sans-serif;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;">👁 Prévisualiser le Valve</button>
+            <button onclick="location.href='<?php echo url("valve"); ?>'" style="width:100%;padding:10px 14px;background:var(--gray-100);color:var(--navy);border:none;border-radius:10px;font-family:'Sora',sans-serif;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;">👁 Prévisualiser le Valve</button>
             <button style="width:100%;padding:10px 14px;background:rgba(239,68,68,0.08);color:var(--danger);border:1px solid rgba(239,68,68,0.2);border-radius:10px;font-family:'Sora',sans-serif;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;" onclick="alert('Annonce urgente en cours de création...');openModal();">🚨 Publier une urgence</button>
           </div>
         </div>

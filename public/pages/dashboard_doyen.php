@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'doyen') {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FasiChat — Dashboard Administratif</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/dashboard/dashboard_admin.css">
+<link rel="stylesheet" href="<?php echo css('dashboard_admin'); ?>"
 </head>
 <body>
 
@@ -52,7 +52,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'doyen') {
 
   <div class="nav-section">
     <div class="nav-section-label">Communication</div>
-    <div class="nav-item" onclick="location.href='valve.php'">
+    <div class="nav-item" onclick="location.href='<?php echo url("valve"); ?>'">
       <div class="nav-icon" style="background:rgba(124,58,237,0.12);">📣</div>
       <div><div class="nav-label">Valve</div><div class="nav-sub">Tableau d'affichage</div></div>
       <div class="nav-badge-warn">6</div>
@@ -65,11 +65,11 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'doyen') {
 
   <div class="nav-section">
     <div class="nav-section-label">Navigation</div>
-    <div class="nav-item" onclick="location.href='dashboard_etudiant.php'">
+    <div class="nav-item" onclick="location.href='<?php echo url("dashboard_etudiant"); ?>'">
       <div class="nav-icon" style="background:rgba(79,163,224,0.08);">🎓</div>
       <div><div class="nav-label">Vue Étudiant</div><div class="nav-sub">Dashboard étudiant</div></div>
     </div>
-    <div class="nav-item" onclick="location.href='dashboard_enseignant.php'">
+    <div class="nav-item" onclick="location.href='<?php echo url("dashboard_enseignant"); ?>'">
       <div class="nav-icon" style="background:rgba(245,158,11,0.08);">👨‍🏫</div>
       <div><div class="nav-label">Vue Enseignant</div><div class="nav-sub">Dashboard enseignant</div></div>
     </div>
@@ -79,7 +79,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'doyen') {
     <div class="profile-row">
       <div class="profile-ava"><div class="online-dot"></div>🏛</div>
       <div class="profile-info"><h4>Pr. KUTANGILA</h4><span>Doyen de la Faculté</span></div>
-      <a href="logout.php" class="logout-btn">🚪</a>
+      <a href="<?php echo url('logout'); ?>" class="logout-btn">🚪</a>
     </div>
   </div>
 </div>
@@ -92,7 +92,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'doyen') {
       <div class="topbar-sub">Faculté des Sciences &amp; Technologies · Année 2024–2025</div>
     </div>
     <div class="topbar-right">
-      <button class="tb-btn ghost" onclick="location.href='valve.php'">📣 Valve</button>
+      <button class="tb-btn ghost" onclick="location.href='<?php echo url("valve"); ?>'">📣 Valve</button>
       <button class="tb-btn primary" onclick="openConvocModal()">📅 Convoquer une réunion</button>
     </div>
   </div>
@@ -313,6 +313,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'doyen') {
   </div>
 </div>
 
-<script src="../assets/js/dashboard/dashboard_admin.js"></script>
+<script src="<?php echo js('dashboard_admin'); ?>"</script>
 </body>
 </html>

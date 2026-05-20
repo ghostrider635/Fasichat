@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'vicedoyen') {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FasiChat — Vice-Doyen</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/dashboard/dashboard_vicedoyen.css">
+<link rel="stylesheet" href="<?php echo css('dashboard_vicedoyen'); ?>"
 </head>
 <body>
 <div class="sidebar">
@@ -30,18 +30,18 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'vicedoyen') {
   </div>
   <div class="nav-section">
     <div class="nav-section-label">Communication</div>
-    <div class="nav-item" onclick="location.href='valve.php'"><div class="nav-icon" style="background:rgba(124,58,237,0.12);">📣</div><div><div class="nav-label">Valve</div><div class="nav-sub">Tableau d'affichage</div></div></div>
+    <div class="nav-item" onclick="location.href='<?php echo url("valve"); ?>'"><div class="nav-icon" style="background:rgba(124,58,237,0.12);">📣</div><div><div class="nav-label">Valve</div><div class="nav-sub">Tableau d'affichage</div></div></div>
     <div class="nav-item" onclick="setNav(this)"><div class="nav-icon" style="background:rgba(220,38,38,0.12);">🔒</div><div><div class="nav-label">Message — Doyen</div><div class="nav-sub">Confidentiel</div></div><div class="nav-badge">2</div></div>
   </div>
   <div class="nav-section">
     <div class="nav-section-label">Navigation</div>
     <div class="nav-item" onclick="location.href='dashboard_admin.php'"><div class="nav-icon" style="background:rgba(220,38,38,0.08);">🏛</div><div><div class="nav-label">Espace Doyen</div><div class="nav-sub">Dashboard principal</div></div></div>
-    <div class="nav-item" onclick="location.href='dashboard_etudiant.php'"><div class="nav-icon" style="background:rgba(79,163,224,0.08);">🎓</div><div><div class="nav-label">Vue Étudiant</div><div class="nav-sub">Dashboard étudiant</div></div></div>
+    <div class="nav-item" onclick="location.href='<?php echo url("dashboard_etudiant"); ?>'"><div class="nav-icon" style="background:rgba(79,163,224,0.08);">🎓</div><div><div class="nav-label">Vue Étudiant</div><div class="nav-sub">Dashboard étudiant</div></div></div>
   </div>
   <div class="sidebar-bottom">
     <div class="profile-ava"><div class="online-dot"></div>🏅</div>
     <div class="profile-info"><h4>Pr. MANPUYA</h4><span>Vice-Doyen</span></div>
-    <a href="logout.php" class="logout-btn">🚪</a>
+    <a href="<?php echo url('logout'); ?>" class="logout-btn">🚪</a>
   </div>
 </div>
 
@@ -52,7 +52,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'vicedoyen') {
       <div class="topbar-sub">Faculté des Sciences Informatiques </div>
     </div>
     <div class="topbar-right">
-      <button class="tb-btn ghost" onclick="location.href='valve.php'">📣 Valve</button>
+      <button class="tb-btn ghost" onclick="location.href='<?php echo url("valve"); ?>'">📣 Valve</button>
       <button class="tb-btn ghost" onclick="location.href='dashboard_admin.php'">🏛 Espace Doyen</button>
       <button class="tb-btn primary" onclick="openModal()">📅 Convoquer une réunion</button>
     </div>

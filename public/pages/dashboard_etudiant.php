@@ -1,10 +1,6 @@
 <?php
-// Vérifier si l'utilisateur est connecté
-session_start();
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'etudiant') {
-    header('Location: login.php');
-    exit();
-}
+require_once '../config.php';
+requireAuth('etudiant');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -13,7 +9,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'etudiant') {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FasiChat — Dashboard Étudiant</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/dashboard/etudiant.css">
+<link rel="stylesheet" href="<?php echo css('etudiant'); ?>">
 </head>
 <body>
 
@@ -30,7 +26,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'etudiant') {
   <div class="nav-tabs">
     <button class="nav-tab active" onclick="switchTab(this,'msgs')">💬 Messages</button>
     <button class="nav-tab" onclick="switchTab(this,'cours')">📚 Cours</button>
-    <button class="nav-tab" onclick="location.href='valve.php'">📣 Valve</button>
+    <button class="nav-tab" onclick="location.href='<?php echo url('valve'); ?>'">📣 Valve</button>
   </div>
 
   <div class="sidebar-search">
@@ -127,7 +123,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'etudiant') {
       <span>Étudiant · L2 FASI</span>
     </div>
     <div class="profile-actions">
-      <a href="logout.php" class="icon-btn" title="Déconnexion">🚪</a>
+      <a href="<?php echo url('logout'); ?>" class="icon-btn" title="Déconnexion">🚪</a>
     </div>
   </div>
 </div>
@@ -249,7 +245,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'etudiant') {
       <div class="msg-avatar" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);">PM</div>
       <div class="msg-group">
         <div class="msg-sender">Prof. MAMPUYA · 10:25</div>
-        <div class="bubble theirs">Excellente question Katende ! La méthode <code style="background:var(--sky-pale);padding:1px 5px;border-radius:4px;font-family:'JetBrains Mono';font-size:12px;\">seConnecter()</code> doit être déclarée abstraite dans la classe mère et implémentée dans chaque classe fille selon ses règles propres. Pensez au polymorphisme ! 🧠</div>
+        <div class="bubble theirs">Excellente question Katende ! La méthode <code style="background:var(--sky-pale);padding:1px 5px;border-radius:4px;font-family:'JetBrains Mono';font-size:12px;">seConnecter()</code> doit être déclarée abstraite dans la classe mère et implémentée dans chaque classe fille selon ses règles propres. Pensez au polymorphisme ! 🧠</div>
         <div class="msg-meta">10:25</div>
       </div>
     </div>
@@ -366,6 +362,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'etudiant') {
   </div>
 </div>
 
-<script src="../assets/js/dashboard/etudiant.js"></script>
+<script src="<?php echo js('etudiant'); ?>"></script>
 </body>
 </html>

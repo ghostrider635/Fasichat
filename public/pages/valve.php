@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_id'])) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FasiChat — Valve Faculté</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/dashboard/valve.css">
+<link rel="stylesheet" href="<?php echo css('valve'); ?>"
 </head>
 <body>
 
@@ -24,7 +24,7 @@ if (!isset($_SESSION['user_id'])) {
     <div class="brand-info"><h3>FasiChat</h3><span>Valve — Tableau d'affichage</span></div>
   </div>
   <div class="nav-tabs">
-    <button class="nav-tab" onclick="location.href='dashboard_etudiant.php'">💬 Chat</button>
+    <button class="nav-tab" onclick="location.href='<?php echo url("dashboard_etudiant"); ?>'">💬 Chat</button>
     <button class="nav-tab active">📣 Valve</button>
     <button class="nav-tab" onclick="location.href='dashboard_admin.php'">🏛 Admin</button>
   </div>
@@ -52,11 +52,11 @@ if (!isset($_SESSION['user_id'])) {
       <div class="cat-info"><div class="cat-name">Académique</div><div class="cat-count">1 publication</div></div>
     </div>
     <div class="section-label" style="margin-top:10px;">Navigation rapide</div>
-    <div class="cat-item" onclick="location.href='dashboard_etudiant.php'">
+    <div class="cat-item" onclick="location.href='<?php echo url("dashboard_etudiant"); ?>'">
       <div class="cat-icon" style="background:rgba(79,163,224,0.1);">🎓</div>
       <div class="cat-info"><div class="cat-name">Mon espace étudiant</div><div class="cat-count">Retour au chat</div></div>
     </div>
-    <div class="cat-item" onclick="location.href='dashboard_enseignant.php'">
+    <div class="cat-item" onclick="location.href='<?php echo url("dashboard_enseignant"); ?>'">
       <div class="cat-icon" style="background:rgba(245,158,11,0.1);">👨‍🏫</div>
       <div class="cat-info"><div class="cat-name">Espace enseignant</div><div class="cat-count">Voir le mur péda.</div></div>
     </div>
@@ -69,7 +69,7 @@ if (!isset($_SESSION['user_id'])) {
       <h4>DJ. ROLLY</h4>
       <span style="color:#a5b4fc;font-size:10px;">Apparitaire · Faculté</span>
     </div>
-    <a href="logout.php" class="icon-btn">🚪</a>
+    <a href="<?php echo url('logout'); ?>" class="icon-btn">🚪</a>
   </div>
 </div>
 
@@ -315,6 +315,6 @@ if (!isset($_SESSION['user_id'])) {
   </div>
 </div>
 
-<script src="../assets/js/dashboard/valve.js"></script>
+<script src="<?php echo js('valve'); ?>"</script>
 </body>
 </html>

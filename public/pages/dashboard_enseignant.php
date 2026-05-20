@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_id']) || ($_SESSION['role'] !== 'enseignant' && $_SES
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FasiChat — Dashboard Enseignant</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/dashboard/dashboard_enseignant.css">
+<link rel="stylesheet" href="<?php echo css('dashboard_enseignant'); ?>"
 </head>
 <body>
 
@@ -27,7 +27,7 @@ if (!isset($_SESSION['user_id']) || ($_SESSION['role'] !== 'enseignant' && $_SES
     <button class="nav-tab active" onclick="showView('students',this)">👥 Étudiants</button>
     <button class="nav-tab" onclick="showView('mur',this)">📋 Mur</button>
     <button class="nav-tab" onclick="showView('msgs',this)">💬 Messages</button>
-    <button class="nav-tab" onclick="location.href='valve.php'">📣 Valve</button>
+    <button class="nav-tab" onclick="location.href='<?php echo url("valve"); ?>'">📣 Valve</button>
   </div>
   <div class="sidebar-search">
     <div class="search-wrap">
@@ -49,19 +49,19 @@ if (!isset($_SESSION['user_id']) || ($_SESSION['role'] !== 'enseignant' && $_SES
     </div>
 
     <div class="section-label">Collègues (Privé)</div>
-    <div class="conv-item" onclick="location.href='dashboard_enseignant.php'">
+    <div class="conv-item" onclick="location.href='<?php echo url("dashboard_enseignant"); ?>'">
       <div class="avatar" style="background:linear-gradient(135deg,#6366f1,#4f46e5);font-size:12px;font-weight:700;">AD</div>
       <div class="conv-info"><div class="conv-name">Prof. KABEYA</div><div class="conv-preview">D'accord pour jeudi 14h</div></div>
       <div class="conv-meta"><div class="conv-time">11:30</div></div>
     </div>
-    <div class="conv-item" onclick="location.href='dashboard_enseignant.php'">
+    <div class="conv-item" onclick="location.href='<?php echo url("dashboard_enseignant"); ?>'">
       <div class="avatar" style="background:linear-gradient(135deg,#f59e0b,#d97706);font-size:12px;font-weight:700;">SK</div>
       <div class="conv-info"><div class="conv-name">Ass. MBUYAMBA</div><div class="conv-preview">J'ai corrigé les copies</div></div>
       <div class="conv-meta"><div class="conv-time">Hier</div></div>
     </div>
 
     <div class="section-label">Convocations reçues</div>
-    <div class="conv-item" onclick="location.href='dashboard_enseignant.php'">
+    <div class="conv-item" onclick="location.href='<?php echo url("dashboard_enseignant"); ?>'">
       <div class="avatar" style="background:linear-gradient(135deg,#dc2626,#991b1b);">🏛</div>
       <div class="conv-info"><div class="conv-name">Doyen — Réunion</div><div class="conv-preview">Conseil pédagogique vendredi</div></div>
       <div class="conv-meta"><div class="conv-time">08:00</div><div class="conv-badge-warn">!</div></div>
@@ -70,7 +70,7 @@ if (!isset($_SESSION['user_id']) || ($_SESSION['role'] !== 'enseignant' && $_SES
   <div class="sidebar-profile">
     <div class="profile-avatar"><div class="online-dot"></div>👨‍🏫</div>
     <div class="profile-info"><h4>Prof. MANPUYA</h4><span>Enseignant · PHP & Cyber</span></div>
-    <div class="profile-actions"><a href="logout.php" class="icon-btn">🚪</a></div>
+    <div class="profile-actions"><a href="<?php echo url('logout'); ?>" class="icon-btn">🚪</a></div>
   </div>
 </div>
 
