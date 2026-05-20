@@ -1,27 +1,24 @@
 <?php
-// Démarrer la session
-session_start();
+require_once '../config.php';
 
 // Si l'utilisateur est déjà connecté, rediriger vers le dashboard approprié
 if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
     switch ($_SESSION['role']) {
         case 'etudiant':
-            header('Location: dashboard_etudiant.php');
+            header('Location: ' . url('dashboard_etudiant.php'));
             break;
         case 'enseignant':
-            header('Location: dashboard_enseignant.php');
-            break;
         case 'assistant':
-            header('Location: dashboard_enseignant.php');
+            header('Location: ' . url('dashboard_enseignant.php'));
             break;
         case 'doyen':
-            header('Location: dashboard_doyen.php');
+            header('Location: ' . url('dashboard_doyen.php'));
             break;
         case 'vicedoyen':
-            header('Location: dashboard_vicedoyen.php');
+            header('Location: ' . url('dashboard_vicedoyen.php'));
             break;
         case 'apparitaire':
-            header('Location: dashboard_apparitaire.php');
+            header('Location: ' . url('dashboard_apparitaire.php'));
             break;
     }
     exit();
@@ -34,7 +31,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FasiChat Classroom — Connexion</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/dashboard/login.css">
+<link rel="stylesheet" href="<?php echo css('login.css'); ?>">
 </head>
 <body>
 <div class="bg-layer"></div>
@@ -138,6 +135,6 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
   </div>
 </div>
 
-<script src="../assets/js/dashboard/login.js"></script>
+<script src="<?php echo js('login.js'); ?>"></script>
 </body>
 </html>

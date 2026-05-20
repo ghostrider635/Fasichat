@@ -70,7 +70,7 @@ if (!isset($_SESSION['user_id']) || ($_SESSION['role'] !== 'enseignant' && $_SES
   <div class="sidebar-profile">
     <div class="profile-avatar"><div class="online-dot"></div>👨‍🏫</div>
     <div class="profile-info"><h4>Prof. MANPUYA</h4><span>Enseignant · PHP & Cyber</span></div>
-    <div class="profile-actions"><a href="login.php" class="icon-btn">🚪</a></div>
+    <div class="profile-actions"><a href="logout.php" class="icon-btn">🚪</a></div>
   </div>
 </div>
 

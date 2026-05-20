@@ -41,7 +41,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'vicedoyen') {
   <div class="sidebar-bottom">
     <div class="profile-ava"><div class="online-dot"></div>🏅</div>
     <div class="profile-info"><h4>Pr. MANPUYA</h4><span>Vice-Doyen</span></div>
-    <a href="login.php" class="logout-btn">🚪</a>
+    <a href="logout.php" class="logout-btn">🚪</a>
   </div>
 </div>
 

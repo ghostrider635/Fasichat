@@ -127,7 +127,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'etudiant') {
       <span>Étudiant · L2 FASI</span>
     </div>
     <div class="profile-actions">
-      <a href="login.php" class="icon-btn" title="Déconnexion">🚪</a>
+      <a href="logout.php" class="icon-btn" title="Déconnexion">🚪</a>
     </div>
   </div>
 </div>

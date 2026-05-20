@@ -38,7 +38,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'apparitaire') {
   <div class="sidebar-bottom">
     <div class="profile-ava"><div class="online-dot"></div>🗂</div>
     <div class="pi"><h4>DJ. ROLLY</h4><span>Apparitaire · Faculté</span></div>
-    <a href="login.php" class="logout-btn">🚪</a>
+    <a href="logout.php" class="logout-btn">🚪</a>
   </div>
 </div>
 

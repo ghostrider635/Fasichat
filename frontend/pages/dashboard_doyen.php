@@ -79,7 +79,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'doyen') {
     <div class="profile-row">
       <div class="profile-ava"><div class="online-dot"></div>🏛</div>
       <div class="profile-info"><h4>Pr. KUTANGILA</h4><span>Doyen de la Faculté</span></div>
-      <a href="login.php" class="logout-btn">🚪</a>
+      <a href="logout.php" class="logout-btn">🚪</a>
     </div>
   </div>
 </div>

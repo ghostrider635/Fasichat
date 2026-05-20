@@ -69,7 +69,7 @@ if (!isset($_SESSION['user_id'])) {
       <h4>DJ. ROLLY</h4>
       <span style="color:#a5b4fc;font-size:10px;">Apparitaire · Faculté</span>
     </div>
-    <a href="login.php" class="icon-btn">🚪</a>
+    <a href="logout.php" class="icon-btn">🚪</a>
   </div>
 </div>
 
