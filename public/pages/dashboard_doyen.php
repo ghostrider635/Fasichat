@@ -313,6 +313,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'doyen') {
   </div>
 </div>
 
-<script src="<?php echo js('dashboard_admin'); ?>"</script>
+<script src="<?php echo js('dashboard_admin'); ?>"></script>
 </body>
 </html>

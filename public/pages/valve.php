@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_id'])) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FasiChat — Valve Faculté</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="<?php echo css('valve'); ?>"
+<link rel="stylesheet" href="<?php echo css('valve'); ?>">
 </head>
 <body>
 
@@ -315,6 +315,6 @@ if (!isset($_SESSION['user_id'])) {
   </div>
 </div>
 
-<script src="<?php echo js('valve'); ?>"</script>
+<script src="<?php echo js('valve'); ?>"></script>
 </body>
 </html>
