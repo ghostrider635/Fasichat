@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'doyen') {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FasiChat — Dashboard Administratif</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="<?php echo css('dashboard_admin'); ?>"
+<link rel="stylesheet" href="<?php echo css('dashboard_admin'); ?>">
 </head>
 <body>
 
@@ -172,7 +172,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'doyen') {
                 <td><div class="action-btns"><button class="act-btn edit">✏</button><button class="act-btn del">🗑</button></div></td>
               </tr>
               <tr>
-                <td><div class="user-cell"><div class="user-row-ava" style="background:linear-gradient(135deg,#var(--sky),#0284c7);" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);">AF</div><div><div class="user-name">JORDY BIAYA</div><div class="user-email">SI2024001</div></div></div></td>
+                <td><div class="user-cell"><div class="user-row-ava" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);">AF</div><div><div class="user-name">JORDY BIAYA</div><div class="user-email">SI2024001</div></div></div></td>
                 <td><span class="role-pill role-etudiant">🎓 Étudiant</span></td>
                 <td><span class="status-dot-sm dot-online"></span><span style="font-size:11px;color:#16a34a;font-weight:600;">En ligne</span></td>
                 <td><div class="action-btns"><button class="act-btn edit">✏</button><button class="act-btn del">🗑</button></div></td>

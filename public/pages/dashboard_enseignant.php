@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_id']) || ($_SESSION['role'] !== 'enseignant' && $_SES
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FasiChat — Dashboard Enseignant</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="<?php echo css('dashboard_enseignant'); ?>"
+<link rel="stylesheet" href="<?php echo css('dashboard_enseignant'); ?>">
 </head>
 <body>
 
