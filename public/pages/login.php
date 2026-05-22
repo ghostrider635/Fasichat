@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once '../config.php';
 
 // Si l'utilisateur est déjà connecté, rediriger vers le dashboard approprié

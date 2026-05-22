@@ -2,11 +2,19 @@ function setRole(btn) {
   document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   const role = btn.textContent.trim();
-  const form = btn.closest('.right-panel').querySelector('form');
-  if (role === 'Enseignant' || role === 'Assistant') {
-    form.action = 'dashboard_enseignant.html';
-  } else {
-    form.action = 'dashboard_etudiant.html';
+  const roleInput = document.getElementById('roleInput');
+  
+  // Convertir le texte du bouton en valeur pour le champ caché
+  switch(role) {
+    case 'Étudiant':
+      roleInput.value = 'etudiant';
+      break;
+    case 'Enseignant':
+      roleInput.value = 'enseignant';
+      break;
+    case 'Assistant':
+      roleInput.value = 'assistant';
+      break;
   }
 }
 // Checkbox toggle

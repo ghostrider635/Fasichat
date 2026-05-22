@@ -1,26 +1,36 @@
 <?php
 // Configuration des chemins
-define('BASE_URL', '/Fasichat/public/');
-define('ASSETS_URL', BASE_URL . 'assets/');
+define('BASE_URL', '/Fasichat/');
+define('ASSETS_URL', BASE_URL . 'public/assets/');
 define('CSS_URL', ASSETS_URL . 'css/dashboard/');
 define('JS_URL', ASSETS_URL . 'js/dashboard/');
 
 // Fonction pour générer les URLs
 function url($page) {
-    return BASE_URL . 'pages/' . $page . '.php';
+    return BASE_URL . 'public/pages/' . $page . '.php';
 }
 
 function css($file) {
+    // Si le fichier a déjà l'extension .css, ne pas l'ajouter
+    if (substr($file, -4) === '.css') {
+        return CSS_URL . $file;
+    }
     return CSS_URL . $file . '.css';
 }
 
 function js($file) {
+    // Si le fichier a déjà l'extension .js, ne pas l'ajouter
+    if (substr($file, -3) === '.js') {
+        return JS_URL . $file;
+    }
     return JS_URL . $file . '.js';
 }
 
 // Fonction pour vérifier l'authentification
 function requireAuth($requiredRole = null) {
-    session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     
     if (!isset($_SESSION['user_id'])) {
         header('Location: ' . url('login'));
