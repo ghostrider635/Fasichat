@@ -7,6 +7,10 @@ define('JS_URL', ASSETS_URL . 'js/dashboard/');
 
 // Fonction pour générer les URLs
 function url($page) {
+    // Si la page a déjà l'extension .php, ne pas l'ajouter
+    if (substr($page, -4) === '.php') {
+        return BASE_URL . 'public/pages/' . $page;
+    }
     return BASE_URL . 'public/pages/' . $page . '.php';
 }
 

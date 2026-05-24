@@ -8,6 +8,7 @@ class Database {
     
     // Configuration de la base de données
     private $host = 'localhost';
+    private $port = '3307';  // Port MySQL personnalisé
     private $dbname = 'fasichat';
     private $username = 'root';
     private $password = '';
@@ -15,7 +16,7 @@ class Database {
     
     private function __construct() {
         try {
-            $dsn = "mysql:host={$this->host};dbname={$this->dbname};charset={$this->charset}";
+            $dsn = "mysql:host={$this->host};port={$this->port};dbname={$this->dbname};charset={$this->charset}";
             $options = [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,

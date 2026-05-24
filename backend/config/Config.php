@@ -6,7 +6,8 @@
 class Config {
     // Configuration de la base de données
     const DB_HOST = 'localhost';
-    const DB_NAME = 'fasichat_db';
+    const DB_PORT = '3307';
+    const DB_NAME = 'fasichat';
     const DB_USER = 'root';
     const DB_PASS = '';
     const DB_CHARSET = 'utf8mb4';
@@ -145,7 +146,7 @@ class Config {
      * Retourne le DSN pour PDO
      */
     public static function getDSN(): string {
-        return "mysql:host=" . self::DB_HOST . ";dbname=" . self::DB_NAME . ";charset=" . self::DB_CHARSET;
+        return "mysql:host=" . self::DB_HOST . ";port=" . self::DB_PORT . ";dbname=" . self::DB_NAME . ";charset=" . self::DB_CHARSET;
     }
     
     /**

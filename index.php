@@ -1,7 +1,7 @@
 <?php
 /**
- * Point d'entrée principal - Redirection vers le frontend
+ * Point d'entrée principal - Redirection vers la page de démarrage
  */
-header('Location: public/pages/login.php');
+header('Location: login.php');
 exit();
 ?>
