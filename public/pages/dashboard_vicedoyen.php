@@ -1,10 +1,9 @@
 <?php
+// Inclure la configuration
+require_once __DIR__ . '/../config.php';
+
 // Vérifier si l'utilisateur est connecté
-session_start();
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'vicedoyen') {
-    header('Location: login.php');
-    exit();
-}
+requireAuth('vicedoyen');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -189,24 +188,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'vicedoyen') {
   </div>
 </div>
 
-<script>
-function setNav(el){document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));el.classList.add('active');}
-function openModal(){document.getElementById('convocModal').classList.add('open');}
-function closeModal(){document.getElementById('convocModal').classList.remove('open');}
-function closeOut(e){if(e.target.id==='convocModal')closeModal();}
-function sendModal(){const o=document.getElementById('mObj').value.trim();if(!o){alert('Veuillez saisir l\'objet.');return;}closeModal();alert('Convocation envoyée avec succès !');}
-function sendConvoc(){const f=document.querySelector('.convoc-form .form-input');if(!f.value.trim()){alert('Veuillez saisir l\'objet.');return;}alert('Convocation envoyée à 30 destinataires !');}
-function handlePrivKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendPrivMsg();}}
-function sendPrivMsg(){
-  const ta=document.getElementById('privInput');
-  const text=ta.value.trim();if(!text)return;
-  const box=document.getElementById('privMsgs');
-  const now=new Date();const time=now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
-  const row=document.createElement('div');row.className='msg-row mine';
-  row.innerHTML=`<div class="msg-av" style="background:linear-gradient(135deg,var(--purple),#5b21b6);">VD</div><div class="msg-group"><div class="bubble mine">${text.replace(/</g,'&lt;')}</div><div class="msg-time">${time} ✓</div></div>`;
-  box.appendChild(row);ta.value='';box.scrollTop=box.scrollHeight;
-}
-window.addEventListener('load',()=>{const b=document.getElementById('privMsgs');b.scrollTop=b.scrollHeight;});
-</script>
+<script src="<?php echo js('dashboard_vicedoyen'); ?>"></script>
 </body>
 </html>
