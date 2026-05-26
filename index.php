@@ -2,6 +2,6 @@
 /**
  * Point d'entrée principal - Redirection vers la page de démarrage
  */
-header('Location: login.php');
+header('Location: public/pages/login.php');
 exit();
 ?>

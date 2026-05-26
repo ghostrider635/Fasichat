@@ -97,7 +97,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
       <button class="role-btn" onclick="setRole(this)">Assistant</button>
     </div>
 
-    <form action="../backend/controllers/AuthController.php" method="post">
+    <form action="<?php echo BASE_URL . 'backend/controllers/AuthController.php'; ?>" method="post">
       <input type="hidden" name="action" value="login">
       <input type="hidden" name="role" id="roleInput" value="etudiant">
       
