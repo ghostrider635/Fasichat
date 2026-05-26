@@ -149,6 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                     break;
 
                 case 'vicedoyen':
+                case 'vice_doyen':
                     header('Location: ../../public/pages/dashboard_vicedoyen.php');
                     break;
 
@@ -165,10 +166,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
         } catch (PDOException $e) {
 
-            error_log("Erreur de connexion : " . $e->getMessage());
+                // Log détaillé temporaire pour débogage
+                $debugPath = __DIR__ . '/../../public/debug_auth.log';
+                $debugData = [];
+                $debugData[] = "[" . date('c') . "] PDOException: " . $e->getMessage();
+                // Table existence
+                try {
+                    $tableExists = Database::getInstance()->tableExists($info['table']) ? 'yes' : 'no';
+                } catch (Exception $ex) {
+                    $tableExists = 'unknown: ' . $ex->getMessage();
+                }
+                $debugData[] = "Table checked: " . $info['table'] . " -> " . $tableExists;
+                $debugData[] = "SQL: " . (isset($sql) ? $sql : 'n/a');
+                $debugData[] = "Params: " . json_encode(['username' => $username, 'role' => $dbRole]);
+                $debugData[] = "Stack: " . $e->getTraceAsString();
+                file_put_contents($debugPath, implode("\n", $debugData) . "\n\n", FILE_APPEND | LOCK_EX);
 
-            header('Location: ../../public/pages/login.php?error=database');
-            exit();
+                header('Location: ../../public/pages/login.php?error=database');
+                exit();
         }
     }
 
