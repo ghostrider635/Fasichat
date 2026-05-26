@@ -54,13 +54,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             ]
         ];
 
-        // Vérifier le rôle
+        // Normaliser le rôle reçu depuis le front (ex: 'vicedoyen' -> 'vice_doyen' en base)
+        $roleAliases = [
+            'vicedoyen' => 'vice_doyen',
+            'vice-doyen' => 'vice_doyen',
+            'vice_doyen' => 'vice_doyen',
+            'doyen' => 'doyen',
+            'enseignant' => 'enseignant',
+            'assistant' => 'assistant',
+            'etudiant' => 'etudiant',
+            'apparitaire' => 'apparitaire'
+        ];
+
+        // Vérifier que le rôle est supporté par la configuration de tables
         if (!isset($tableInfo[$role])) {
             header('Location: ../../public/pages/login.php?error=invalid_role');
             exit();
         }
 
         $info = $tableInfo[$role];
+
+        // Rôle tel qu'il est stocké en base (pour la comparaison u.type_utilisateur)
+        $dbRole = $roleAliases[$role] ?? $role;
 
         try {
 
@@ -77,14 +92,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                     FROM utilisateurs u
                     JOIN {$info['table']} t
                         ON u.id_utilisateur = t.{$info['id_field']}
-                    WHERE t.{$info['matricule_field']} = :username
+                    WHERE (t.{$info['matricule_field']} = :username OR u.email = :username)
                     AND u.type_utilisateur = :role";
 
             $stmt = $db->prepare($sql);
 
             $stmt->execute([
                 ':username' => $username,
-                ':role' => $role
+                ':role' => $dbRole
             ]);
 
             $user = $stmt->fetch(PDO::FETCH_ASSOC);

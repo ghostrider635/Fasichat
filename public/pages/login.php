@@ -91,6 +91,24 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
       <p>Connectez-vous à votre espace académique</p>
     </div>
 
+    <?php
+    // Afficher les erreurs de login (param ?error=...)
+    if (isset($_GET['error'])) {
+      $err = $_GET['error'];
+      $messages = [
+        'empty' => 'Veuillez remplir tous les champs.',
+        'invalid_role' => 'Rôle invalide sélectionné.',
+        'not_found' => 'Utilisateur introuvable (vérifiez matricule/email et rôle).',
+        'inactive' => 'Compte inactif, contactez l\'administration.',
+        'password' => 'Mot de passe incorrect.',
+        'database' => 'Erreur base de données. Voir les logs.',
+        'invalid_type' => 'Type d\'utilisateur non supporté.'
+      ];
+      $msg = $messages[$err] ?? 'Erreur inconnue.';
+      echo "<div class=\"login-error\">" . htmlspecialchars($msg) . "</div>";
+    }
+    ?>
+
     <div class="role-selector">
       <button class="role-btn active" onclick="setRole(this)">Étudiant</button>
       <button class="role-btn" onclick="setRole(this)">Enseignant</button>
