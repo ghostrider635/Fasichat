@@ -1,10 +1,7 @@
 <?php
-// Vérifier si l'utilisateur est connecté
-session_start();
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'doyen') {
-    header('Location: login.php');
-    exit();
-}
+// Inclure la configuration et vérifier l'authentification
+require_once __DIR__ . '/../config.php';
+requireAuth('doyen');
 ?>
 <!DOCTYPE html>
 <html lang="fr">

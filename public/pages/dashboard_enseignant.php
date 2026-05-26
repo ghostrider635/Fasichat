@@ -1,10 +1,8 @@
 <?php
-// Vérifier si l'utilisateur est connecté
-session_start();
-if (!isset($_SESSION['user_id']) || ($_SESSION['role'] !== 'enseignant' && $_SESSION['role'] !== 'assistant')) {
-    header('Location: login.php');
-    exit();
-}
+// Inclure la configuration et vérifier l'authentification
+require_once __DIR__ . '/../config.php';
+// Autorise les enseignants et assistants (requireAuth gère le cas assistant pour 'enseignant')
+requireAuth('enseignant');
 ?>
 <!DOCTYPE html>
 <html lang="fr">

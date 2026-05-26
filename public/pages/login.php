@@ -95,6 +95,9 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
       <button class="role-btn active" onclick="setRole(this)">Étudiant</button>
       <button class="role-btn" onclick="setRole(this)">Enseignant</button>
       <button class="role-btn" onclick="setRole(this)">Assistant</button>
+      <button class="role-btn" onclick="setRole(this)">Doyen</button>
+      <button class="role-btn" onclick="setRole(this)">Vice-Doyen</button>
+      <button class="role-btn" onclick="setRole(this)">Apparitaire</button>
     </div>
 
     <form action="<?php echo BASE_URL . 'backend/controllers/AuthController.php'; ?>" method="post">
