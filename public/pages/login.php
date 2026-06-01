@@ -120,7 +120,17 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
 
     <form action="<?php echo BASE_URL . 'backend/controllers/AuthController.php'; ?>" method="post">
       <input type="hidden" name="action" value="login">
-      <input type="hidden" name="role" id="roleInput" value="etudiant">
+      <div class="form-group">
+        <label class="form-label" for="roleInput">Rôle</label>
+        <select name="role" id="roleInput" class="form-input">
+          <option value="etudiant">Étudiant</option>
+          <option value="enseignant">Enseignant</option>
+          <option value="assistant">Assistant</option>
+          <option value="doyen">Doyen</option>
+          <option value="vicedoyen">Vice-Doyen</option>
+          <option value="apparitaire">Apparitaire</option>
+        </select>
+      </div>
       
       <div class="form-group">
         <label class="form-label">Identifiant / Matricule</label>
