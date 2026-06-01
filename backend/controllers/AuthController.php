@@ -47,6 +47,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 'id_field' => 'id_vice_doyen',
                 'matricule_field' => 'matricule'
             ],
+            'vice_doyen' => [
+                'table' => 'vice_doyens',
+                'id_field' => 'id_vice_doyen',
+                'matricule_field' => 'matricule'
+            ],
+            'vice-doyen' => [
+                'table' => 'vice_doyens',
+                'id_field' => 'id_vice_doyen',
+                'matricule_field' => 'matricule'
+            ],
             'apparitaire' => [
                 'table' => 'apparitaires',
                 'id_field' => 'id_apparitaire',

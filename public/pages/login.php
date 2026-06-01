@@ -127,7 +127,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
           <option value="enseignant">Enseignant</option>
           <option value="assistant">Assistant</option>
           <option value="doyen">Doyen</option>
-          <option value="vicedoyen">Vice-Doyen</option>
+          <option value="vice_doyen">Vice-Doyen</option>
           <option value="apparitaire">Apparitaire</option>
         </select>
       </div>

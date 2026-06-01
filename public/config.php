@@ -71,6 +71,13 @@ function requireAuth($requiredRole = null) {
             return; // Les assistants ont accès au dashboard enseignant
         }
         
+        if ($requiredRole === 'vicedoyen' && $_SESSION['role'] === 'vice_doyen') {
+            return;
+        }
+        if ($requiredRole === 'vice_doyen' && $_SESSION['role'] === 'vicedoyen') {
+            return;
+        }
+        
         if ($_SESSION['role'] !== $requiredRole) {
             header('Location: ' . url('login'));
             exit();
@@ -93,6 +100,7 @@ function redirectByRole() {
         case 'doyen':
             return url('dashboard_doyen');
         case 'vicedoyen':
+        case 'vice_doyen':
             return url('dashboard_vicedoyen');
         case 'apparitaire':
             return url('dashboard_apparitaire');

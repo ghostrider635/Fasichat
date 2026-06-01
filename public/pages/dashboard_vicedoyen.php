@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../config.php';
 
 // Vérifier si l'utilisateur est connecté
-requireAuth('vicedoyen');
+requireAuth('vice_doyen');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
