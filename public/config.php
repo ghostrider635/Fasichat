@@ -2,8 +2,40 @@
 // Configuration des chemins
 define('BASE_URL', '/Fasichat/');
 define('ASSETS_URL', BASE_URL . 'public/assets/');
-define('CSS_URL', ASSETS_URL . 'css/dashboard/');
-define('JS_URL', ASSETS_URL . 'js/dashboard/');
+define('CSS_URL', ASSETS_URL . 'css/');
+define('JS_URL', ASSETS_URL . 'js/');
+
+// Résout l'URL d'un asset CSS ou JS en cherchant dans plusieurs dossiers
+function assetUrl(string $type, string $file): string {
+    $extension = $type === 'css' ? '.css' : '.js';
+    $assetDir = __DIR__ . '/assets/' . $type . '/';
+    $assetUrl = ASSETS_URL . $type . '/';
+
+    if (substr($file, -strlen($extension)) !== $extension) {
+        $file .= $extension;
+    }
+
+    // Chemin direct dans le dossier racine assets/css ou assets/js
+    $directPath = $assetDir . $file;
+    if (file_exists($directPath)) {
+        return $assetUrl . $file;
+    }
+
+    // Dossier du même nom que le fichier, ex. assets/js/valve/valve.js
+    $sameFolderPath = $assetDir . dirname($file) . '/' . basename($file);
+    if ($file === basename($file) && file_exists($assetDir . basename($file, $extension) . '/' . basename($file))) {
+        return $assetUrl . basename($file, $extension) . '/' . basename($file);
+    }
+
+    // Dossier dashboard pour les assets dashboard spécifiques
+    $dashboardPath = $assetDir . 'dashboard/' . $file;
+    if (file_exists($dashboardPath)) {
+        return $assetUrl . 'dashboard/' . $file;
+    }
+
+    // Fallback vers le dossier racine
+    return $assetUrl . $file;
+}
 
 // Fonction pour générer les URLs
 function url($page) {
@@ -15,19 +47,11 @@ function url($page) {
 }
 
 function css($file) {
-    // Si le fichier a déjà l'extension .css, ne pas l'ajouter
-    if (substr($file, -4) === '.css') {
-        return CSS_URL . $file;
-    }
-    return CSS_URL . $file . '.css';
+    return assetUrl('css', $file);
 }
 
 function js($file) {
-    // Si le fichier a déjà l'extension .js, ne pas l'ajouter
-    if (substr($file, -3) === '.js') {
-        return JS_URL . $file;
-    }
-    return JS_URL . $file . '.js';
+    return assetUrl('js', $file);
 }
 
 // Fonction pour vérifier l'authentification
