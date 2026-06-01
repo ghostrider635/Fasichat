@@ -8,7 +8,7 @@ class Database {
     
     // Configuration de la base de données
     private $host = 'localhost';
-    private $port = '3307';  // Port MySQL personnalisé
+    private $port = '3306';  // Port MySQL personnalisé
     private $dbname = 'fasichat';
     private $username = 'root';
     private $password = '';

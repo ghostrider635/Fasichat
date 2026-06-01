@@ -92,13 +92,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                     FROM utilisateurs u
                     JOIN {$info['table']} t
                         ON u.id_utilisateur = t.{$info['id_field']}
-                    WHERE (t.{$info['matricule_field']} = :username OR u.email = :username)
+                    WHERE (t.{$info['matricule_field']} = :username OR u.email = :email)
                     AND u.type_utilisateur = :role";
 
             $stmt = $db->prepare($sql);
 
             $stmt->execute([
                 ':username' => $username,
+                ':email' => $username,
                 ':role' => $dbRole
             ]);
 

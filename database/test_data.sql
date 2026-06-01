@@ -53,33 +53,33 @@ INSERT INTO promotions (nom, annee, niveau) VALUES
 
 -- Étudiants
 INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe_hash, type_utilisateur) VALUES
-('Dupont', 'Jean', 'jean.dupont@etudiant.univ.fr', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'etudiant'),
-('Martin', 'Marie', 'marie.martin@etudiant.univ.fr', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'etudiant'),
-('Bernard', 'Pierre', 'pierre.bernard@etudiant.univ.fr', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'etudiant'),
-('Petit', 'Sophie', 'sophie.petit@etudiant.univ.fr', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'etudiant'),
-('Durand', 'Luc', 'luc.durand@etudiant.univ.fr', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'etudiant');
+('Dupont', 'Jean', 'jean.dupont@etudiant.univ.fr', '$2y$10$Y6w1CSF4ZVzZTjacP0PEPuEN.sPmt3hyC5a2bKbBWYhOzrpotvG.K', 'etudiant'),
+('Martin', 'Marie', 'marie.martin@etudiant.univ.fr', '$2y$10$Y6w1CSF4ZVzZTjacP0PEPuEN.sPmt3hyC5a2bKbBWYhOzrpotvG.K', 'etudiant'),
+('Bernard', 'Pierre', 'pierre.bernard@etudiant.univ.fr', '$2y$10$Y6w1CSF4ZVzZTjacP0PEPuEN.sPmt3hyC5a2bKbBWYhOzrpotvG.K', 'etudiant'),
+('Petit', 'Sophie', 'sophie.petit@etudiant.univ.fr', '$2y$10$Y6w1CSF4ZVzZTjacP0PEPuEN.sPmt3hyC5a2bKbBWYhOzrpotvG.K', 'etudiant'),
+('Durand', 'Luc', 'luc.durand@etudiant.univ.fr', '$2y$10$Y6w1CSF4ZVzZTjacP0PEPuEN.sPmt3hyC5a2bKbBWYhOzrpotvG.K', 'etudiant');
 
 -- Enseignants
 INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe_hash, type_utilisateur) VALUES
-('Leroy', 'Philippe', 'philippe.leroy@univ.fr', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'enseignant'),
-('Moreau', 'Isabelle', 'isabelle.moreau@univ.fr', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'enseignant'),
-('Simon', 'Thomas', 'thomas.simon@univ.fr', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'enseignant');
+('Leroy', 'Philippe', 'philippe.leroy@univ.fr', '$2y$10$Y6w1CSF4ZVzZTjacP0PEPuEN.sPmt3hyC5a2bKbBWYhOzrpotvG.K', 'enseignant'),
+('Moreau', 'Isabelle', 'isabelle.moreau@univ.fr', '$2y$10$Y6w1CSF4ZVzZTjacP0PEPuEN.sPmt3hyC5a2bKbBWYhOzrpotvG.K', 'enseignant'),
+('Simon', 'Thomas', 'thomas.simon@univ.fr', '$2y$10$Y6w1CSF4ZVzZTjacP0PEPuEN.sPmt3hyC5a2bKbBWYhOzrpotvG.K', 'enseignant');
 
 -- Assistant
 INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe_hash, type_utilisateur) VALUES
-('Laurent', 'Nicolas', 'nicolas.laurent@univ.fr', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'assistant');
+('Laurent', 'Nicolas', 'nicolas.laurent@univ.fr', '$2y$10$Y6w1CSF4ZVzZTjacP0PEPuEN.sPmt3hyC5a2bKbBWYhOzrpotvG.K', 'assistant');
 
 -- Doyen
 INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe_hash, type_utilisateur) VALUES
-('Michel', 'Robert', 'robert.michel@univ.fr', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'doyen');
+('Michel', 'Robert', 'robert.michel@univ.fr', '$2y$10$Y6w1CSF4ZVzZTjacP0PEPuEN.sPmt3hyC5a2bKbBWYhOzrpotvG.K', 'doyen');
 
 -- Vice-Doyen
 INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe_hash, type_utilisateur) VALUES
-('Garcia', 'Claire', 'claire.garcia@univ.fr', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'vice_doyen');
+('Garcia', 'Claire', 'claire.garcia@univ.fr', '$2y$10$Y6w1CSF4ZVzZTjacP0PEPuEN.sPmt3hyC5a2bKbBWYhOzrpotvG.K', 'vice_doyen');
 
 -- Apparitaire
 INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe_hash, type_utilisateur) VALUES
-('Roux', 'David', 'david.roux@univ.fr', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'apparitaire');
+('Roux', 'David', 'david.roux@univ.fr', '$2y$10$Y6w1CSF4ZVzZTjacP0PEPuEN.sPmt3hyC5a2bKbBWYhOzrpotvG.K', 'apparitaire');
 
 -- 3. INSERTION DANS LES TABLES SPÉCIALISÉES
 
