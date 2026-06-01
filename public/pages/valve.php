@@ -1,10 +1,6 @@
 <?php
-// Vérifier si l'utilisateur est connecté (le valve est accessible par tous les rôles)
-session_start();
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
-    exit();
-}
+require_once __DIR__ . '/../config.php';
+requireAuth();
 ?>
 <!DOCTYPE html>
 <html lang="fr">

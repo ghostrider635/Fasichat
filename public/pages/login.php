@@ -16,6 +16,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
             header('Location: ' . url('dashboard_doyen.php'));
             break;
         case 'vicedoyen':
+        case 'vice_doyen':
             header('Location: ' . url('dashboard_vicedoyen.php'));
             break;
         case 'apparitaire':
