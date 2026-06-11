@@ -55,11 +55,19 @@ async function apiPost(action, data) {
 async function sendMsg() {
   const ta = document.getElementById('msgInput');
   const text = ta.value.trim();
-  if (!text) return;
 
   const data = new FormData();
-  data.append('receiver_id', window.FASI_ACTIVE_RECEIVER_ID || window.FASI_PAGE_DATA?.students?.[0]?.id || window.FASI_PAGE_DATA?.privateContacts?.[0]?.id || '18');
-  data.append('content', text);
+  const mediaInput = document.getElementById('mediaInput');
+  const file = mediaInput?.files?.[0] || null;
+
+  const receiverId = window.FASI_ACTIVE_RECEIVER_ID || window.FASI_PAGE_DATA?.students?.[0]?.id || window.FASI_PAGE_DATA?.privateContacts?.[0]?.id || '18';
+
+  if (!text && !file) return;
+
+  data.append('receiver_id', receiverId);
+  if (text !== '') data.append('content', text);
+  if (file) data.append('file', file);
+
 
   try {
     await apiPost('message_send', data);

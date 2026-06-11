@@ -15,22 +15,8 @@
     <div class="brand-info"><h3>FasiChat Admin</h3><span>Espace Vice-Doyen</span></div>
   </div>
   <div class="role-badge-sidebar"><div class="rdot"></div><span>VICE-DOYEN — Accès administratif</span></div>
-  <div class="nav-section">
-    <div class="nav-section-label">Administration</div>
-    <div class="nav-item active" onclick="setNav(this)"><div class="nav-icon" style="background:rgba(124,58,237,0.12);">📊</div><div><div class="nav-label">Tableau de bord</div><div class="nav-sub">Vue d'ensemble</div></div></div>
-    <div class="nav-item" onclick="setNav(this)"><div class="nav-icon" style="background:rgba(245,158,11,0.12);">📅</div><div><div class="nav-label">Convoquer réunion</div><div class="nav-sub">Commission de recherche</div></div></div>
-    <div class="nav-item" onclick="setNav(this)"><div class="nav-icon" style="background:rgba(34,197,94,0.12);">🔬</div><div><div class="nav-label">Commission Recherche</div><div class="nav-sub">Suivi des projets</div></div></div>
-  </div>
-  <div class="nav-section">
-    <div class="nav-section-label">Communication</div>
-    <div class="nav-item" onclick="location.href='valve.php'"><div class="nav-icon" style="background:rgba(124,58,237,0.12);">📣</div><div><div class="nav-label">Valve</div><div class="nav-sub">Tableau d'affichage</div></div></div>
-    <div class="nav-item" onclick="openViceDoyenPrivateChat(this)"><div class="nav-icon" style="background:rgba(220,38,38,0.12);">🔒</div><div><div class="nav-label">Message — Doyen</div><div class="nav-sub">Confidentiel</div></div><div class="nav-badge">2</div></div>
-  </div>
-  <div class="nav-section">
-    <div class="nav-section-label">Navigation</div>
-    <div class="nav-item" onclick="location.href='dashboard_admin.php'"><div class="nav-icon" style="background:rgba(220,38,38,0.08);">🏛</div><div><div class="nav-label">Espace Doyen</div><div class="nav-sub">Dashboard principal</div></div></div>
-    <div class="nav-item" onclick="location.href='dashboard_etudiant.php'"><div class="nav-icon" style="background:rgba(79,163,224,0.08);">🎓</div><div><div class="nav-label">Vue Étudiant</div><div class="nav-sub">Dashboard étudiant</div></div></div>
-  </div>
+<div id="leftMenuMount"></div>
+
   <div class="sidebar-bottom">
     <div class="profile-ava"><div class="online-dot"></div>🏅</div>
     <div class="profile-info"><h4>Pr. MANPUYA</h4><span>Vice-Doyen</span></div>
@@ -51,11 +37,11 @@
     </div>
   </div>
   <div class="admin-content">
-    <div class="stats-row">
-      <div class="stat-card purple"><div class="stat-icon">🔬</div><div class="stat-number">8</div><div class="stat-label">Projets de recherche</div><div class="stat-trend">En cours ce semestre</div></div>
-      <div class="stat-card blue"><div class="stat-icon">👨‍🏫</div><div class="stat-number">18</div><div class="stat-label">Enseignants-chercheurs</div><div class="stat-trend">Commission de recherche</div></div>
-      <div class="stat-card gold"><div class="stat-icon">📅</div><div class="stat-number">1</div><div class="stat-label">Convocation envoyée</div><div class="stat-trend">Ce mois-ci</div></div>
-      <div class="stat-card green"><div class="stat-icon">📣</div><div class="stat-number">6</div><div class="stat-label">Annonces Valve</div><div class="stat-trend">Publications actives</div></div>
+    <div class="stats-row" id="vdStats">
+      <div class="stat-card purple"><div class="stat-icon">🔬</div><div class="stat-number"></div><div class="stat-label">Projets de recherche</div><div class="stat-trend">En cours ce semestre</div></div>
+      <div class="stat-card blue"><div class="stat-icon">👨‍🏫</div><div class="stat-number"></div><div class="stat-label">Enseignants-chercheurs</div><div class="stat-trend">Commission de recherche</div></div>
+      <div class="stat-card gold"><div class="stat-icon">📅</div><div class="stat-number"></div><div class="stat-label">Convocation envoyée</div><div class="stat-trend">Ce mois-ci</div></div>
+      <div class="stat-card green"><div class="stat-icon">📣</div><div class="stat-number"></div><div class="stat-label">Annonces Valve</div><div class="stat-trend">Publications actives</div></div>
     </div>
     <div class="two-col">
       <!-- CONVOC -->
@@ -94,58 +80,29 @@
               <div class="msg-row">
                 <div class="msg-av" style="background:linear-gradient(135deg,#dc2626,#991b1b);">D</div>
                 <div class="msg-group">
-                  <div class="bubble theirs">VD, avez-vous les résultats de la commission de recherche pour vendredi ?</div>
-                  <div class="msg-time">09:00</div>
-                </div>
-              </div>
-              <div class="msg-row mine">
-                <div class="msg-av" style="background:linear-gradient(135deg,var(--purple),#5b21b6);">VD</div>
-                <div class="msg-group">
-                  <div class="bubble mine">Oui Professeur, je les ferai parvenir avant jeudi midi. 3 nouveaux projets validés.</div>
-                  <div class="msg-time">09:15 ✓✓</div>
-                </div>
-              </div>
-              <div class="msg-row">
-                <div class="msg-av" style="background:linear-gradient(135deg,#dc2626,#991b1b);">D</div>
-                <div class="msg-group">
-                  <div class="bubble theirs">Parfait. Préparez aussi le bilan budgétaire pour la réunion.</div>
-                  <div class="msg-time">09:22</div>
-                </div>
-              </div>
-              <div class="msg-row mine">
-                <div class="msg-av" style="background:linear-gradient(135deg,var(--purple),#5b21b6);">VD</div>
-                <div class="msg-group">
-                  <div class="bubble mine">Bien reçu. Je prépare tout cela.</div>
-                  <div class="msg-time">09:30 ✓✓</div>
+                  <div class="bubble theirs">Chargement du message confidentiel...</div>
+                  <div class="msg-time">...</div>
                 </div>
               </div>
             </div>
             <div class="priv-input">
+              <input type="file" id="mediaInput" style="display:none;" />
+              <div class="priv-toolbar">
+                <button class="toolbar-btn" type="button" data-accept=".pdf,.doc,.docx,image/*,video/*,audio/*">📎 Fichier</button>
+                <button class="toolbar-btn" type="button" data-accept="image/*">🖼 Image</button>
+                <button class="toolbar-btn" type="button" data-accept=".pdf">📊 PDF</button>
+                <button class="toolbar-btn" type="button" data-accept="audio/*">🎤 Voice</button>
+              </div>
               <textarea class="priv-textarea" placeholder="Message confidentiel au Doyen..." id="privInput" onkeydown="handlePrivKey(event)" rows="1"></textarea>
-              <button class="priv-send" onclick="sendPrivMsg()">➤</button>
+              <button class="priv-send" onclick="sendPrivMsg()" type="button">➤</button>
             </div>
+
           </div>
         </div>
         <!-- ACTIVITY -->
         <div class="card">
           <div class="card-header"><div class="card-title">🕐 Activité récente</div></div>
-          <div class="activity-list">
-            <div class="activity-item">
-              <div class="act-icon-wrap" style="background:rgba(245,158,11,0.1);">📅</div>
-              <div class="act-text"><strong>Convocation envoyée</strong><p>Commission recherche · 27 Jan · 30 destinataires</p></div>
-              <div class="act-time">Hier 09:15</div>
-            </div>
-            <div class="activity-item">
-              <div class="act-icon-wrap" style="background:rgba(124,58,237,0.1);">💬</div>
-              <div class="act-text"><strong>Message du Doyen</strong><p>Résultats commission de recherche</p></div>
-              <div class="act-time">Auj. 09:00</div>
-            </div>
-            <div class="activity-item">
-              <div class="act-icon-wrap" style="background:rgba(34,197,94,0.1);">🔬</div>
-              <div class="act-text"><strong>Projet validé</strong><p>Cybersécurité des systèmes embarqués</p></div>
-              <div class="act-time">18 Jan</div>
-            </div>
-          </div>
+          <div class="activity-list" id="vdRecentActivity"></div>
         </div>
       </div>
     </div>
@@ -207,7 +164,23 @@ async function apiPostBackend(action,data){
 }
 function appendRecipientsBackend(data){data.append('destinataires[]','Enseignant');data.append('destinataires[]','Assistant');}
 sendModal=async function(){const o=document.getElementById('mObj').value.trim();if(!o){alert('Veuillez saisir l\'objet.');return;}const data=new FormData();data.append('objet',o);data.append('date',document.getElementById('mDate').value);data.append('heure',document.getElementById('mHeure').value);data.append('lieu',document.getElementById('mLieu').value);data.append('message',document.getElementById('mMsg').value);appendRecipientsBackend(data);try{await apiPostBackend('convocation_create',data);closeModal();alert('Convocation envoyée avec succès !');}catch(error){alert(error.message||'Erreur pendant l\'envoi.');}};
-sendConvoc=async function(){const form=document.querySelector('.convoc-form');const fields=form.querySelectorAll('.form-input');if(!fields[0].value.trim()){alert('Veuillez saisir l\'objet.');return;}const data=new FormData();data.append('objet',fields[0].value);data.append('date',fields[1].value);data.append('heure',fields[2].value);data.append('lieu',fields[3].value);data.append('message',form.querySelector('.form-textarea')?.value||'');appendRecipientsBackend(data);try{await apiPostBackend('convocation_create',data);alert('Convocation envoyée à 30 destinataires !');}catch(error){alert(error.message||'Erreur pendant l\'envoi.');}};
+sendConvoc=async function(){
+  const form=document.querySelector('.convoc-form');
+  const fields=form.querySelectorAll('.form-input');
+  if(!fields[0].value.trim()){alert('Veuillez saisir l\'objet.');return;}
+  const data=new FormData();
+  data.append('objet',fields[0].value);
+  data.append('date',fields[1].value);
+  data.append('heure',fields[2].value);
+  data.append('lieu',fields[3].value);
+  data.append('message',form.querySelector('.form-textarea')?.value||'');
+
+  // destinataires : enseignants + assistants (DB côté backend)
+  appendRecipientsBackend(data);
+
+  try{await apiPostBackend('convocation_create',data);closeModal();alert('Convocation envoyée avec succès !');}catch(error){alert(error.message||'Erreur pendant l\'envoi.');}
+};
+
 sendPrivMsg=async function(){const ta=document.getElementById('privInput');const text=ta.value.trim();if(!text)return;const data=new FormData();data.append('receiver_id','1');data.append('content',text);try{await apiPostBackend('message_send',data);}catch(error){alert(error.message||'Erreur pendant l\'envoi du message.');return;}const box=document.getElementById('privMsgs');const now=new Date();const time=now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');const row=document.createElement('div');row.className='msg-row mine';row.innerHTML=`<div class="msg-av" style="background:linear-gradient(135deg,var(--purple),#5b21b6);">VD</div><div class="msg-group"><div class="bubble mine">${text.replace(/</g,'&lt;')}</div><div class="msg-time">${time} OK</div></div>`;box.appendChild(row);ta.value='';box.scrollTop=box.scrollHeight;};
 window.addEventListener('load',()=>{const b=document.getElementById('privMsgs');b.scrollTop=b.scrollHeight;});
 </script>
@@ -249,7 +222,9 @@ async function openViceDoyenPrivateChat(item){
 sendPrivMsg=async function(){
   const ta=document.getElementById('privInput');
   const text=ta.value.trim();
-  if(!text)return;
+  const mediaInput=document.getElementById('mediaInput');
+  const file=mediaInput?.files?.[0] || null;
+  if(!text && !file)return;
   const contact=vdDoyenContact();
   const receiverId=window.FASI_ACTIVE_PRIV_RECEIVER_ID||contact?.id;
   if(!receiverId){alert('Contact Doyen introuvable.');return;}
@@ -262,6 +237,8 @@ sendPrivMsg=async function(){
 };
 window.addEventListener('load',()=>openViceDoyenPrivateChat());
 </script>
+<script src="assets/js/dashboard_doyen_leftmenu_dynamic.js"></script>
 <script src="assets/js/dynamic-db.js"></script>
 </body>
 </html>
+

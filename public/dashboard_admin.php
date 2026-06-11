@@ -22,51 +22,8 @@
     <span>DOYEN — Accès complet</span>
   </div>
 
-  <div class="nav-section">
-    <div class="nav-section-label">Administration</div>
-    <div class="nav-item active" onclick="setNav(this)">
-      <div class="nav-icon" style="background:rgba(79,163,224,0.12);">📊</div>
-      <div><div class="nav-label">Tableau de bord</div><div class="nav-sub">Vue d'ensemble</div></div>
-    </div>
-    <div class="nav-item" onclick="setNav(this)">
-      <div class="nav-icon" style="background:rgba(245,158,11,0.12);">📅</div>
-      <div><div class="nav-label">Convoquer réunion</div><div class="nav-sub">Enseignants &amp; Assistants</div></div>
-    </div>
-    <div class="nav-item" onclick="setNav(this)">
-      <div class="nav-icon" style="background:rgba(34,197,94,0.12);">👥</div>
-      <div><div class="nav-label">Utilisateurs</div><div class="nav-sub">Gérer les comptes</div></div>
-      <div class="nav-badge">42</div>
-    </div>
-    <div class="nav-item" onclick="setNav(this)">
-      <div class="nav-icon" style="background:rgba(99,102,241,0.12);">📚</div>
-      <div><div class="nav-label">Cours &amp; Promotions</div><div class="nav-sub">Organiser les formations</div></div>
-    </div>
-  </div>
+  <div id="leftMenuMount"></div>
 
-  <div class="nav-section">
-    <div class="nav-section-label">Communication</div>
-    <div class="nav-item" onclick="location.href='valve.php'">
-      <div class="nav-icon" style="background:rgba(124,58,237,0.12);">📣</div>
-      <div><div class="nav-label">Valve</div><div class="nav-sub">Tableau d'affichage</div></div>
-      <div class="nav-badge-warn">6</div>
-    </div>
-    <div class="nav-item" onclick="openAdminPrivateMessages(this)">
-      <div class="nav-icon" style="background:rgba(239,68,68,0.12);">💬</div>
-      <div><div class="nav-label">Messages privés</div><div class="nav-sub">Doyen ↔ Vice-Doyen</div></div>
-    </div>
-  </div>
-
-  <div class="nav-section">
-    <div class="nav-section-label">Navigation</div>
-    <div class="nav-item" onclick="location.href='dashboard_etudiant.php'">
-      <div class="nav-icon" style="background:rgba(79,163,224,0.08);">🎓</div>
-      <div><div class="nav-label">Vue Étudiant</div><div class="nav-sub">Dashboard étudiant</div></div>
-    </div>
-    <div class="nav-item" onclick="location.href='dashboard_enseignant.php'">
-      <div class="nav-icon" style="background:rgba(245,158,11,0.08);">👨‍🏫</div>
-      <div><div class="nav-label">Vue Enseignant</div><div class="nav-sub">Dashboard enseignant</div></div>
-    </div>
-  </div>
 
   <div class="sidebar-bottom">
     <div class="profile-row">
@@ -86,6 +43,11 @@
     </div>
     <div class="topbar-right">
       <button class="tb-btn ghost" onclick="location.href='valve.php'">📣 Valve</button>
+      <script>
+        // si l'utilisateur n'est pas Apparitaire, on évite que l'action de publication échoue.
+        // (lecture seule reste autorisée sur valve.php)
+      </script>
+
       <button class="tb-btn primary" onclick="openConvocModal()">📅 Convoquer une réunion</button>
     </div>
   </div>
@@ -96,163 +58,68 @@
     <div class="stats-row">
       <div class="stat-card blue">
         <div class="stat-icon">🎓</div>
-        <div class="stat-number">312</div>
+        <div class="stat-number"></div>
         <div class="stat-label">Étudiants inscrits</div>
-        <div class="stat-trend up">↑ +18 ce semestre</div>
+        <div class="stat-trend up"></div>
       </div>
       <div class="stat-card gold">
         <div class="stat-icon">👨‍🏫</div>
-        <div class="stat-number">24</div>
+        <div class="stat-number"></div>
         <div class="stat-label">Enseignants actifs</div>
-        <div class="stat-trend neutral">→ Stable</div>
+        <div class="stat-trend neutral"></div>
       </div>
       <div class="stat-card green">
         <div class="stat-icon">📚</div>
-        <div class="stat-number">18</div>
+        <div class="stat-number"></div>
         <div class="stat-label">Cours en cours</div>
-        <div class="stat-trend up">↑ +3 nouveaux</div>
+        <div class="stat-trend up"></div>
       </div>
       <div class="stat-card red">
         <div class="stat-icon">📅</div>
-        <div class="stat-number">2</div>
+        <div class="stat-number"></div>
         <div class="stat-label">Convocations envoyées</div>
-        <div class="stat-trend neutral">Ce mois-ci</div>
+        <div class="stat-trend neutral"></div>
       </div>
     </div>
+
 
     <!-- TWO COLUMNS -->
     <div class="two-col">
 
-      <!-- USERS TABLE -->
+      <!-- USERS (dynamique) -->
       <div class="card">
         <div class="card-header">
-          <div class="card-title">👥 Utilisateurs récents</div>
+          <div class="card-title">👥 Utilisateurs (DB)</div>
           <button class="card-action">Voir tous →</button>
         </div>
         <div style="overflow-x:auto;">
-          <table class="users-table">
-            <thead>
-              <tr>
-                <th>Utilisateur</th>
-                <th>Rôle</th>
-                <th>Statut</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><div class="user-cell"><div class="user-row-ava" style="background:linear-gradient(135deg,#dc2626,#991b1b);">AB</div><div><div class="user-name">Pr. KUTANGILA</div><div class="user-email">doyen@faculte.edu</div></div></div></td>
-                <td><span class="role-pill role-doyen">🏛 Doyen</span></td>
-                <td><span class="status-dot-sm dot-online"></span><span style="font-size:11px;color:#16a34a;font-weight:600;">En ligne</span></td>
-                <td><div class="action-btns"><button class="act-btn edit">✏</button></div></td>
-              </tr>
-              <tr>
-                <td><div class="user-cell"><div class="user-row-ava" style="background:linear-gradient(135deg,#7c3aed,#5b21b6);">VD</div><div><div class="user-name">Pr. MANPUYA</div><div class="user-email">vdoyen@faculte.edu</div></div></div></td>
-                <td><span class="role-pill" style="background:rgba(124,58,237,0.1);color:#7c3aed;border:1px solid rgba(124,58,237,0.2);">🏅 Vice-Doyen</span></td>
-                <td><span class="status-dot-sm dot-online"></span><span style="font-size:11px;color:#16a34a;font-weight:600;">En ligne</span></td>
-                <td><div class="action-btns"><button class="act-btn edit">✏</button></div></td>
-              </tr>
-              <tr>
-                <td><div class="user-cell"><div class="user-row-ava" style="background:linear-gradient(135deg,#6366f1,#4f46e5);">MS</div><div><div class="user-name">DJ. ROLLY</div><div class="user-email">apparitaire@faculte.edu</div></div></div></td>
-                <td><span class="role-pill role-apparitaire">🗂 Apparitaire</span></td>
-                <td><span class="status-dot-sm dot-online"></span><span style="font-size:11px;color:#16a34a;font-weight:600;">En ligne</span></td>
-                <td><div class="action-btns"><button class="act-btn edit">✏</button></div></td>
-              </tr>
-              <tr>
-                <td><div class="user-cell"><div class="user-row-ava" style="background:linear-gradient(135deg,#f59e0b,#d97706);">PM</div><div><div class="user-name">Prof. KABEYA</div><div class="user-email">mbaye@faculte.edu</div></div></div></td>
-                <td><span class="role-pill role-enseignant">👨‍🏫 Enseignant</span></td>
-                <td><span class="status-dot-sm dot-online"></span><span style="font-size:11px;color:#16a34a;font-weight:600;">En ligne</span></td>
-                <td><div class="action-btns"><button class="act-btn edit">✏</button><button class="act-btn del">🗑</button></div></td>
-              </tr>
-              <tr>
-                <td><div class="user-cell"><div class="user-row-ava" style="background:linear-gradient(135deg,#var(--sky),#0284c7);" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);">AF</div><div><div class="user-name">JORDY BIAYA</div><div class="user-email">SI2024001</div></div></div></td>
-                <td><span class="role-pill role-etudiant">🎓 Étudiant</span></td>
-                <td><span class="status-dot-sm dot-online"></span><span style="font-size:11px;color:#16a34a;font-weight:600;">En ligne</span></td>
-                <td><div class="action-btns"><button class="act-btn edit">✏</button><button class="act-btn del">🗑</button></div></td>
-              </tr>
-              <tr>
-                <td><div class="user-cell"><div class="user-row-ava" style="background:linear-gradient(135deg,#14b8a6,#0d9488);">AM</div><div><div class="user-name">MIRIAM YULILA</div><div class="user-email">SI2024002</div></div></div></td>
-                <td><span class="role-pill role-etudiant">🎓 Étudiant</span></td>
-                <td><span class="status-dot-sm dot-offline"></span><span style="font-size:11px;color:var(--gray-400);font-weight:600;">Hors ligne</span></td>
-                <td><div class="action-btns"><button class="act-btn edit">✏</button><button class="act-btn del">🗑</button></div></td>
-              </tr>
-            </tbody>
-          </table>
+          <div id="usersMount"></div>
         </div>
       </div>
 
       <!-- RIGHT COLUMN -->
       <div style="display:flex;flex-direction:column;gap:16px;">
 
-        <!-- QUICK CONVOC -->
+        <!-- COURSES (dynamique) -->
         <div class="card">
           <div class="card-header">
-            <div class="card-title">📅 Convocation rapide</div>
+            <div class="card-title">📚 Cours & Promotions (DB)</div>
           </div>
-          <div class="convoc-form">
-            <div class="form-group">
-              <label class="form-label">Objet de la réunion *</label>
-              <input type="text" class="form-input" placeholder="Ex: Conseil pédagogique S5...">
-            </div>
-            <div class="form-row-2">
-              <div class="form-group">
-                <label class="form-label">Date *</label>
-                <input type="date" class="form-input">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Heure *</label>
-                <input type="time" class="form-input">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Lieu / Lien</label>
-              <input type="text" class="form-input" placeholder="Salle A-12 ou lien Meet...">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Destinataires</label>
-              <div class="recipients-box">
-                <div class="recipient-tag">👨‍🏫 Tous les enseignants (24)</div>
-                <div class="recipient-tag">📋 Tous les assistants (6)</div>
-              </div>
-            </div>
-            <button class="send-convoc-btn" onclick="sendConvoc()">
-              📨 Envoyer la convocation
-            </button>
-          </div>
+          <div id="coursesMount" class="courses-mount"></div>
         </div>
 
-        <!-- RECENT ACTIVITY -->
+        <!-- RECENT ACTIVITY (déjà gérée par dashboard_admin_dynamic.js) -->
         <div class="card">
           <div class="card-header">
             <div class="card-title">🕐 Activité récente</div>
             <button class="card-action">Tout voir</button>
           </div>
-          <div class="activity-list">
-            <div class="activity-item">
-              <div class="act-icon-wrap" style="background:rgba(245,158,11,0.1);">📅</div>
-              <div class="act-text"><strong>Convocation envoyée</strong><p>Conseil pédagogique · 24 Jan à 14h00 · 30 destinataires</p></div>
-              <div class="act-time">Hier 16:00</div>
-            </div>
-            <div class="activity-item">
-              <div class="act-icon-wrap" style="background:rgba(34,197,94,0.1);">👤</div>
-              <div class="act-text"><strong>Nouveau compte créé</strong><p>YVE SHONGO — Étudiant L2 FASI · SI2024006</p></div>
-              <div class="act-time">Hier 10:20</div>
-            </div>
-            <div class="activity-item">
-              <div class="act-icon-wrap" style="background:rgba(124,58,237,0.1);">📣</div>
-              <div class="act-text"><strong>Annonce Valve publiée</strong><p>DJ. ROLLY · Modification calendrier examens S5</p></div>
-              <div class="act-time">Auj. 07:30</div>
-            </div>
-            <div class="activity-item">
-              <div class="act-icon-wrap" style="background:rgba(79,163,224,0.1);">💬</div>
-              <div class="act-text"><strong>Message privé</strong><p>Pr. MAPUNYA (Vice-Doyen) vous a écrit</p></div>
-              <div class="act-time">Auj. 09:00</div>
-            </div>
-          </div>
+          <div class="activity-list" id="recentActivityList"></div>
         </div>
 
       </div>
     </div>
+
 
   </div>
 </div>
@@ -307,6 +174,12 @@
 </div>
 
 <script src="assets/js/dashboard_admin.js"></script>
+<script src="assets/js/dashboard_admin_dynamic.js"></script>
+<script src="assets/js/dashboard_doyen_leftmenu_dynamic.js"></script>
+
+
+
+
 <script>
 window.FASI_PAGE_DATA = <?= json_encode(pageData(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT); ?>;
 function openAdminPrivateMessages(item){
@@ -317,5 +190,6 @@ function openAdminPrivateMessages(item){
 }
 </script>
 <script src="assets/js/dynamic-db.js"></script>
+
 </body>
 </html>

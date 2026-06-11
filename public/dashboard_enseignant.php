@@ -244,21 +244,23 @@
 
   <!-- Input (shown for msgs view) -->
   <div class="chat-input-area" id="input-area" style="display:none;">
+    <input type="file" id="mediaInput" style="display:none;" />
     <div class="input-toolbar">
-      <button class="toolbar-btn">📎 Fichier</button>
-      <button class="toolbar-btn">🖼 Image</button>
-      <button class="toolbar-btn">📊 PDF</button>
+      <button class="toolbar-btn" type="button" data-accept=".pdf,.doc,.docx,image/*,video/*,audio/*">📎 Fichier</button>
+      <button class="toolbar-btn" type="button" data-accept="image/*">🖼 Image</button>
+      <button class="toolbar-btn" type="button" data-accept=".pdf">📊 PDF</button>
     </div>
     <div class="input-row">
-      <button class="voice-btn">🎤</button>
+      <button class="voice-btn" type="button" data-accept="audio/*">🎤</button>
       <div class="msg-textarea-wrap">
         <textarea class="msg-textarea" placeholder="Répondre aux étudiants..." rows="1" id="msgInput" onkeydown="handleKey(event)"></textarea>
         <button class="emoji-btn">😊</button>
       </div>
-      <button class="send-btn" onclick="sendMsg()">➤</button>
+      <button class="send-btn" onclick="sendMsg()" type="button">➤</button>
     </div>
   </div>
 </div>
+
 
 <!-- RIGHT PANEL -->
 <div class="right-panel">
@@ -295,7 +297,24 @@
 <script src="assets/js/dashboard_enseignant.js"></script>
 <script>
 window.FASI_PAGE_DATA = <?= json_encode(pageData(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT); ?>;
+(function initMediaPicker(){
+  const mediaInput = document.getElementById('mediaInput');
+  if (!mediaInput) return;
+  document.querySelectorAll('.input-toolbar .toolbar-btn[data-accept]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      mediaInput.accept = btn.getAttribute('data-accept') || '*/*';
+      mediaInput.click();
+    });
+  });
+  document.querySelectorAll('.input-row .voice-btn[data-accept]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      mediaInput.accept = btn.getAttribute('data-accept') || 'audio/*';
+      mediaInput.click();
+    });
+  });
+})();
 </script>
 <script src="assets/js/dynamic-db.js"></script>
 </body>
 </html>
+

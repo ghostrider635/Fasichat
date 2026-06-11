@@ -23,8 +23,9 @@ class ValveController
     public static function create(): void
     {
         AuthMiddleware::requireAuth();
-        RoleMiddleware::requireRole(['Apparitaire']);
+        RoleMiddleware::requireRole(['Apparitaire', 'Doyen', 'Vice-Doyen']);
         SecurityService::verifyCsrfToken($_POST['csrf_token'] ?? null);
+
 
         $titre = ValidationService::sanitizeString((string)($_POST['titre'] ?? ''));
         $contenu = ValidationService::sanitizeString((string)($_POST['contenu'] ?? ''));
@@ -53,8 +54,9 @@ class ValveController
     public static function update(): void
     {
         AuthMiddleware::requireAuth();
-        RoleMiddleware::requireRole(['Apparitaire']);
+        RoleMiddleware::requireRole(['Apparitaire', 'Doyen', 'Vice-Doyen']);
         SecurityService::verifyCsrfToken($_POST['csrf_token'] ?? null);
+
 
         $id = ValidationService::sanitizeInteger($_POST['id'] ?? 0);
         $titre = ValidationService::sanitizeString((string)($_POST['titre'] ?? ''));

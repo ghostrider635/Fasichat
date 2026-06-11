@@ -7,6 +7,8 @@ use App\Services\ValidationService;
 use App\Repositories\MessageRepository;
 use App\Repositories\ConversationRepository;
 use App\Services\SecurityService;
+use App\Services\FileManager;
+
 
 class MessageController
 {
@@ -59,7 +61,17 @@ class MessageController
         $receiverId = ValidationService::sanitizeInteger($_POST['receiver_id'] ?? 0);
         $content = ValidationService::sanitizeString((string)($_POST['content'] ?? ''));
 
-        if ($receiverId <= 0 || $content === '') {
+        $fileId = null;
+        if (!empty($_FILES['file']) && !empty($_FILES['file']['name'])) {
+            $uploadDir = __DIR__ . '/../../uploads';
+            $file = $_FILES['file'];
+            $fileId = FileManager::upload($file, $uploadDir);
+        }
+
+        $hasContent = $content !== '';
+        $hasFile = $fileId !== null;
+
+        if ($receiverId <= 0 || (!$hasContent && !$hasFile)) {
             header('HTTP/1.1 400 Bad Request');
             echo 'Paramètres manquants pour envoyer le message.';
             exit();
@@ -75,7 +87,7 @@ class MessageController
         }
 
         $conversationId = $conversationRepo->getOrCreatePrivateConversation($senderId, $receiverId);
-        $messageRepo->createMessage($conversationId, $senderId, $content);
+        $messageRepo->createMessage($conversationId, $senderId, $content === '' ? '(media)' : $content, $fileId);
 
         if (self::isAjax()) {
             header('Content-Type: application/json');
@@ -86,6 +98,7 @@ class MessageController
         header('Location: dashboard_etudiant.php');
         exit();
     }
+
 
     private static function isAjax(): bool
     {

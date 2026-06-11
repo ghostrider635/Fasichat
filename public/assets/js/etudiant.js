@@ -39,15 +39,31 @@ async function apiPost(action, data) {
 async function sendMsg() {
   const ta = document.getElementById('msgInput');
   const text = ta.value.trim();
-  if (!text) return;
 
+  // Input media (optionnel)
   const data = new FormData();
-  data.append('content', text);
   const action = window.FASI_ACTIVE_COURSE_ID ? 'mur_publish' : 'message_send';
-  if (window.FASI_ACTIVE_COURSE_ID) {
-    data.append('course_id', window.FASI_ACTIVE_COURSE_ID);
-  } else {
+
+  // Envoi media uniquement supporté pour message privé (message_send)
+  // (mur_publish n'est pas encore étendu pour les pièces jointes)
+
+
+
+  // Input media (optionnel) - utilisé seulement quand action === message_send
+  const mediaInput = document.getElementById('mediaInput');
+  const file = mediaInput?.files?.[0] || null;
+
+  if (action === 'message_send') {
+    if (!text && !file) return;
+
+    data.append('content', text);
+    if (file) data.append('file', file);
     data.append('receiver_id', window.FASI_ACTIVE_RECEIVER_ID || window.FASI_PAGE_DATA?.privateContacts?.[0]?.id || '17');
+  } else {
+    // mur_publish: texte uniquement pour le moment
+    if (!text) return;
+    data.append('content', text);
+    data.append('course_id', window.FASI_ACTIVE_COURSE_ID);
   }
 
   try {
@@ -60,19 +76,42 @@ async function sendMsg() {
   const msgs = document.getElementById('messages');
   const now = new Date();
   const time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+
   const row = document.createElement('div');
   row.className = 'msg-row mine';
-  row.innerHTML = `
-    <div class="msg-avatar" style="background:linear-gradient(135deg,var(--sky),var(--accent));">${escapeHtml(window.FASI_PAGE_DATA?.userInitials || 'Moi')}</div>
-    <div class="msg-group">
-      <div class="bubble mine">${escapeHtml(text)}</div>
-      <div class="msg-meta">${time} <span class="check-read">OK</span></div>
-    </div>`;
+  if (file && action === 'message_send') {
+    const mime = file.type || '';
+    const bubbleHtml = mime.startsWith('image/')
+      ? `<img src="${URL.createObjectURL(file)}" alt="image" style="max-width:260px;border-radius:12px;display:block;" />`
+      : (mime.startsWith('video/')
+        ? `<video controls style="max-width:260px;border-radius:12px;"><source src="${URL.createObjectURL(file)}" /></video>`
+        : (mime.startsWith('audio/')
+          ? `<audio controls src="${URL.createObjectURL(file)}"></audio>`
+          : `<div style="font-weight:700;">📎 ${escapeHtml(file.name || 'media')}</div>`
+        ));
+
+    row.innerHTML = `
+      <div class="msg-avatar" style="background:linear-gradient(135deg,var(--sky),var(--accent));">${escapeHtml(window.FASI_PAGE_DATA?.userInitials || 'Moi')}</div>
+      <div class="msg-group">
+        <div class="bubble mine">${bubbleHtml}</div>
+        <div class="msg-meta">${time} OK</div>
+      </div>`;
+  } else {
+    row.innerHTML = `
+      <div class="msg-avatar" style="background:linear-gradient(135deg,var(--sky),var(--accent));">${escapeHtml(window.FASI_PAGE_DATA?.userInitials || 'Moi')}</div>
+      <div class="msg-group">
+        <div class="bubble mine">${escapeHtml(text)}</div>
+        <div class="msg-meta">${time} <span class="check-read">OK</span></div>
+      </div>`;
+  }
+
   msgs.appendChild(row);
   ta.value = '';
   ta.style.height = 'auto';
+  if (mediaInput) mediaInput.value = '';
   msgs.scrollTop = msgs.scrollHeight;
 }
+
 
 function personName(person) {
   return `${person?.prenom || ''} ${person?.nom || ''}`.trim() || person?.email || 'Discussion';

@@ -1,4 +1,8 @@
 <?php require __DIR__ . '/_bootstrap.php'; requireAuthPage(); ?>
+<?php
+// Valve est accessible à tous les rôles connectés (lecture seule)
+// mais l'envoi (nouvelle annonce) reste réservé à l'Apparitaire.
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>

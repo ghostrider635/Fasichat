@@ -42,14 +42,25 @@ function cleanCategory(value) {
 }
 
 async function publishAnnonce() {
-  const title = document.querySelector('.modal-body .form-input').value.trim();
+  const modal = document.getElementById('modal');
+  const titleInput = modal?.querySelector('input[type="text"], .form-input[type="text"], .modal-body input');
+  const textarea = modal?.querySelector('textarea');
+  const select = modal?.querySelector('select');
+
+  const title = titleInput?.value?.trim() || '';
   if (!title) {
     alert('Veuillez saisir un titre.');
     return;
   }
 
-  const content = document.querySelector('.modal-body .form-textarea').value.trim();
-  const category = cleanCategory(document.querySelector('.modal-body .form-select')?.value || 'Information');
+  const content = textarea?.value?.trim() || '';
+  if (!content) {
+    alert('Veuillez saisir le contenu de l\'annonce.');
+    return;
+  }
+
+  const category = cleanCategory(select?.value || 'Information');
+
   const data = new FormData();
   data.append('titre', title);
   data.append('contenu', content);
@@ -58,12 +69,13 @@ async function publishAnnonce() {
   try {
     await apiPost('valve_create', data);
     closeModal();
-    alert('Annonce publiee avec succes sur le Valve !');
+    alert('Annonce publiée avec succès sur le Valve !');
     loadValveAnnonces();
   } catch (error) {
     alert(error.message || 'Erreur pendant la publication.');
   }
 }
+
 
 function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[char]));

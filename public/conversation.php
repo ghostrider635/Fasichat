@@ -92,7 +92,26 @@ $otherName = trim(($otherUser['prenom'] ?? '') . ' ' . ($otherUser['nom'] ?? '')
 $otherInitials = initials($otherUser);
 $currentInitials = initials($currentUser);
 $backUrl = dashboardForRole($currentUser['role_nom'] ?? '');
+
+// Prépare un lookup pour les fichiers liés aux messages
+$fileById = [];
+$allFileIds = [];
+foreach ($messages as $m) {
+    $fid = $m['fichier_id'] ?? null;
+    if ($fid) $allFileIds[] = (int)$fid;
+}
+$allFileIds = array_values(array_unique($allFileIds));
+if (!empty($allFileIds)) {
+    $placeholders = implode(',', array_fill(0, count($allFileIds), '?'));
+    $stmt = Database::getInstance()->prepare("SELECT id, nom_origine, nom_stockage, mime_type, chemin FROM fichiers WHERE id IN ($placeholders)");
+    $stmt->execute($allFileIds);
+    $rows = $stmt->fetchAll();
+    foreach ($rows as $row) {
+        $fileById[(int)$row['id']] = $row;
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -190,7 +209,37 @@ $backUrl = dashboardForRole($currentUser['role_nom'] ?? '');
           <?php if (!$mine): ?>
             <div class="msg-sender"><?= h(trim(($message['prenom'] ?? '') . ' ' . ($message['nom'] ?? ''))) ?> · <?= h(formatDateTime($message['created_at'] ?? '')) ?></div>
           <?php endif; ?>
-          <div class="bubble <?= $mine ? 'mine' : 'theirs' ?>"><?= h($message['contenu'] ?? '') ?></div>
+          <div class="bubble <?= $mine ? 'mine' : 'theirs' ?>">
+            <?php
+              $contenu = (string)($message['contenu'] ?? '');
+              $fichierId = $message['fichier_id'] ?? null;
+              $fichier = $fichierId && isset($fileById[(int)$fichierId]) ? $fileById[(int)$fichierId] : null;
+            ?>
+
+            <?php if ($fichier): ?>
+              <?php $mime = (string)($fichier['mime_type'] ?? ''); $chemin = (string)($fichier['chemin'] ?? ''); $nom = (string)($fichier['nom_origine'] ?? 'media'); ?>
+              <?php if (str_starts_with($mime, 'image/')): ?>
+                <img src="<?= h('/uploads/' . ($fichier['nom_stockage'] ?? '')) ?>" alt="image" style="max-width:260px;border-radius:12px;display:block;" />
+              <?php elseif (str_starts_with($mime, 'video/')): ?>
+                <video controls style="max-width:260px;border-radius:12px;">
+                  <source src="<?= h('/uploads/' . ($fichier['nom_stockage'] ?? '')) ?>" />
+                </video>
+              <?php elseif (str_starts_with($mime, 'audio/')): ?>
+                <audio controls>
+                  <source src="<?= h('/uploads/' . ($fichier['nom_stockage'] ?? '')) ?>" />
+                </audio>
+              <?php else: ?>
+                <div style="font-weight:700;">📎 <?= h($nom) ?></div>
+              <?php endif; ?>
+              <?php if ($contenu !== ''): ?>
+                <div style="margin-top:6px;white-space:pre-wrap;"><?= h($contenu) ?></div>
+              <?php endif; ?>
+            <?php else: ?>
+              <?= h($contenu) ?>
+            <?php endif; ?>
+          </div>
+
+
           <div class="msg-meta"><?= h(formatDateTime($message['created_at'] ?? '')) ?><?= $mine ? ' OK' : '' ?></div>
         </div>
       </div>
@@ -201,17 +250,22 @@ $backUrl = dashboardForRole($currentUser['role_nom'] ?? '');
     <div class="input-toolbar">
       <button class="toolbar-btn" type="button" id="attachFile">📎 Fichier</button>
       <button class="toolbar-btn" type="button" id="attachImage">🖼 Image</button>
-      <button class="toolbar-btn" type="button" id="attachPdf">📊 PDF</button>
+      <button class="toolbar-btn" type="button" id="attachVideo">🎬 Vidéo</button>
+      <button class="toolbar-btn" type="button" id="attachVoice">🎤 Voice</button>
     </div>
+
     <div class="input-row">
-      <button class="voice-btn" title="Message vocal" type="button">🎤</button>
+      <input type="file" id="mediaInput" style="display:none;" />
+
       <div class="msg-textarea-wrap">
         <textarea class="msg-textarea" placeholder="Ecrire un message prive..." rows="1" id="msgInput" onkeydown="handleConversationKey(event)"></textarea>
         <button class="emoji-btn" type="button">😊</button>
       </div>
+
       <button class="send-btn" onclick="sendConversationMessage()" type="button">➤</button>
     </div>
   </div>
+
 </div>
 
 <div class="right-panel">
@@ -241,6 +295,27 @@ window.FASI_CONVERSATION = {
   csrfToken: <?= json_encode(\App\Services\SecurityService::csrfToken(), JSON_UNESCAPED_UNICODE) ?>
 };
 
+(function initMediaAttach() {
+  const mediaInput = document.getElementById('mediaInput');
+  const attachFile = document.getElementById('attachFile');
+  const attachImage = document.getElementById('attachImage');
+  const attachVideo = document.getElementById('attachVideo');
+  const attachVoice = document.getElementById('attachVoice');
+
+  if (!mediaInput) return;
+
+  const openPicker = (accept) => {
+    mediaInput.accept = accept || '*/*';
+    mediaInput.click();
+  };
+
+  attachFile?.addEventListener('click', () => openPicker('.pdf,.doc,.docx,image/*,video/*,audio/*'));
+  attachImage?.addEventListener('click', () => openPicker('image/*'));
+  attachVideo?.addEventListener('click', () => openPicker('video/*'));
+  attachVoice?.addEventListener('click', () => openPicker('audio/*'));
+})();
+
+
 function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[char]));
 }
@@ -255,12 +330,17 @@ function handleConversationKey(event) {
 async function sendConversationMessage() {
   const input = document.getElementById('msgInput');
   const text = input.value.trim();
-  if (!text) return;
+
+  const fileInput = document.getElementById('mediaInput');
+  const file = fileInput?.files?.[0] || null;
+
+  if (!text && !file) return;
 
   const form = new FormData();
   form.append('receiver_id', window.FASI_CONVERSATION.receiverId);
   form.append('content', text);
   form.append('csrf_token', window.FASI_CONVERSATION.csrfToken);
+  if (file) form.append('file', file);
 
   const response = await fetch('index.php?action=message_send', {
     method: 'POST',
@@ -276,13 +356,38 @@ async function sendConversationMessage() {
   const time = now.toLocaleString('fr-FR');
   const row = document.createElement('div');
   row.className = 'msg-row mine';
-  row.innerHTML = `<div class="msg-avatar" style="background:linear-gradient(135deg,var(--sky),var(--accent));">${escapeHtml(window.FASI_CONVERSATION.currentInitials)}</div><div class="msg-group"><div class="bubble mine">${escapeHtml(text)}</div><div class="msg-meta">${escapeHtml(time)} OK</div></div>`;
+
+  const bubbleHtml = (() => {
+    if (file) {
+      const mime = file.type || '';
+      if (mime.startsWith('image/')) {
+        const url = URL.createObjectURL(file);
+        return `<img src="${url}" alt="image" style="max-width:260px;border-radius:12px;display:block;" />`;
+      }
+      if (mime.startsWith('video/')) {
+        const url = URL.createObjectURL(file);
+        return `<video controls style="max-width:260px;border-radius:12px;"><source src="${url}" /></video>`;
+      }
+      if (mime.startsWith('audio/')) {
+        const url = URL.createObjectURL(file);
+        return `<audio controls src="${url}"></audio>`;
+      }
+      // PDF/Doc...
+      return `<div style="font-weight:700;">📎 ${escapeHtml(file.name || 'media')}</div>`;
+    }
+    return escapeHtml(text);
+  })();
+
+  row.innerHTML = `<div class="msg-avatar" style="background:linear-gradient(135deg,var(--sky),var(--accent));">${escapeHtml(window.FASI_CONVERSATION.currentInitials)}</div><div class="msg-group"><div class="bubble mine">${bubbleHtml}</div><div class="msg-meta">${escapeHtml(time)} OK</div></div>`;
+
   const box = document.getElementById('messages');
   box.appendChild(row);
   input.value = '';
   input.style.height = 'auto';
+  if (fileInput) fileInput.value = '';
   box.scrollTop = box.scrollHeight;
 }
+
 
 function initSearch() {
   const input = document.getElementById('conversationSearch');

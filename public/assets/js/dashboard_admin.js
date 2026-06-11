@@ -16,9 +16,15 @@ function closeModalOutside(e) {
 }
 
 async function apiPost(action, data) {
-  if (data instanceof FormData && window.FASI_PAGE_DATA?.csrfToken) {
-    data.set('csrf_token', window.FASI_PAGE_DATA.csrfToken);
+  // CSRF: le bootstrap passe généralement un token dans `window.FASI_PAGE_DATA.csrfToken`
+  // Si non présent, le backend va refuser avec 403.
+  if (data instanceof FormData) {
+    const token = window.FASI_PAGE_DATA?.csrfToken;
+    if (token) {
+      data.set('csrf_token', token);
+    }
   }
+
   const response = await fetch(`index.php?action=${action}`, {
     method: 'POST',
     headers: { Accept: 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
@@ -27,6 +33,7 @@ async function apiPost(action, data) {
   if (!response.ok) throw new Error(await response.text());
   return response.json();
 }
+
 
 async function sendConvocation(data, successMessage) {
   try {
@@ -38,9 +45,12 @@ async function sendConvocation(data, successMessage) {
 }
 
 function appendDefaultRecipients(data) {
+  // backend attend des IDs de destinataires (destinataires[])
+  // on envoie donc les rôles comme fallback si nécessaire.
   data.append('destinataires[]', 'Enseignant');
   data.append('destinataires[]', 'Assistant');
 }
+
 
 async function sendConvocModal() {
   const obj = document.getElementById('convocObj').value.trim();

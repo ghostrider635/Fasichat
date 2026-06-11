@@ -8,6 +8,8 @@ use App\Controllers\FileController;
 use App\Controllers\MessageController;
 use App\Controllers\MurController;
 use App\Controllers\ValveController;
+use App\Controllers\DashboardDoyenController;
+
 
 class Router
 {
@@ -30,6 +32,15 @@ class Router
             'valve_update' => ValveController::update(),
             'valve_delete' => ValveController::delete(),
             'file_upload' => FileController::upload(),
+
+            'dashboard_doyen_stats' => DashboardDoyenController::stats(),
+            'dashboard_doyen_recent_users' => DashboardDoyenController::recentUsers(),
+            'dashboard_doyen_recent_activity' => DashboardDoyenController::recentActivity(),
+
+            'dashboard_doyen_courses_list' => DashboardDoyenController::coursesList(),
+            'dashboard_doyen_promotions_list' => DashboardDoyenController::promotionsList(),
+            'dashboard_doyen_users_list' => DashboardDoyenController::usersList(),
+
             default => DashboardController::home(),
         };
     }

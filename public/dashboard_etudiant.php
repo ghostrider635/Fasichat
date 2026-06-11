@@ -267,22 +267,25 @@
 
   <!-- Input area -->
   <div class="chat-input-area">
-    <div class="input-toolbar">
-      <button class="toolbar-btn">📎 Fichier</button>
-      <button class="toolbar-btn">🖼 Image</button>
-      <button class="toolbar-btn">🎥 Vidéo</button>
-      <button class="toolbar-btn">📊 PDF</button>
+  <div class="input-toolbar">
+      <button class="toolbar-btn" type="button" data-accept=".pdf,.doc,.docx,image/*,video/*,audio/*">📎 Fichier</button>
+      <button class="toolbar-btn" type="button" data-accept="image/*">🖼 Image</button>
+      <button class="toolbar-btn" type="button" data-accept="video/*">🎥 Vidéo</button>
+      <button class="toolbar-btn" type="button" data-accept=".pdf">📊 PDF</button>
     </div>
+
     <div class="input-row">
-      <button class="voice-btn" title="Message vocal">🎤</button>
+      <button class="voice-btn" type="button" title="Message vocal" data-accept="audio/*">🎤</button>
+      <input type="file" id="mediaInput" style="display:none;" />
       <div class="msg-textarea-wrap">
         <textarea class="msg-textarea" placeholder="Écrire un message...&#10;Appuyez sur Entrée pour envoyer" rows="1" id="msgInput" onkeydown="handleKey(event)"></textarea>
-        <button class="emoji-btn">😊</button>
+        <button class="emoji-btn" type="button">😊</button>
       </div>
-      <button class="send-btn" onclick="sendMsg()">➤</button>
+      <button class="send-btn" onclick="sendMsg()" type="button">➤</button>
     </div>
   </div>
 </div>
+
 
 <!-- ===== RIGHT PANEL ===== -->
 <div class="right-panel">
@@ -362,7 +365,18 @@
 <script src="assets/js/etudiant.js"></script>
 <script>
 window.FASI_PAGE_DATA = <?= json_encode(pageData(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT); ?>;
+(function initMediaPicker(){
+  const mediaInput = document.getElementById('mediaInput');
+  if (!mediaInput) return;
+  document.querySelectorAll('.input-toolbar .toolbar-btn[data-accept]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      mediaInput.accept = btn.getAttribute('data-accept') || '*/*';
+      mediaInput.click();
+    });
+  });
+})();
 </script>
 <script src="assets/js/dynamic-db.js"></script>
 </body>
 </html>
+
