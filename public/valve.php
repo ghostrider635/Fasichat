@@ -111,154 +111,16 @@
       </div>
     </div>
 
-    <!-- Annonces grid -->
-    <div class="annonces-grid">
 
-      <!-- URGENT -->
-      <div class="annonce-card urgent" style="grid-column:1/-1;">
-        <div class="ac-header">
-          <div class="ac-cat-icon" style="background:rgba(239,68,68,0.12);">🚨</div>
-          <div class="ac-meta">
-            <div class="ac-cat-label" style="color:#ef4444;">URGENT</div>
-            <div class="ac-title">Modification du calendrier des examens — Semestre 5</div>
-          </div>
-          <div class="ac-priority" style="background:rgba(239,68,68,0.1);color:#ef4444;">⚠</div>
-        </div>
-        <div class="ac-body">
-          <div class="ac-text">Suite à des contraintes organisationnelles, le calendrier des examens de rattrapage a été modifié. Les épreuves de <strong>Programmation Web</strong> et de <strong>Mathematique pour informaticien</strong> sont reportées au <strong>lundi 27 juillet 2026</strong>. Veuillez consulter le fichier joint pour le nouveau calendrier complet.</div>
-          <div class="ac-file">
-            <span style="font-size:20px;">📄</span>
-            <span>Nouveau_Calendrier_Examens_S5.pdf</span>
-            <small>1.2 Mo</small>
-          </div>
-          <div class="ac-footer">
-            <div class="ac-author">
-              <div class="ac-author-ava" style="background:linear-gradient(135deg,#6366f1,#4f46e5);">MS</div>
-              <div><div class="ac-author-name">DJ. ROLLY · Apparitaire</div></div>
-            </div>
-            <div class="ac-date">Aujourd'hui · 07:30</div>
-          </div>
-        </div>
+    <!-- Annonces grid (dynamique via JS + DB) -->
+    <div class="annonces-grid" id="annoncesGrid">
+      <div style="grid-column:1/-1;opacity:0.7;padding:18px;text-align:center;">
+        Chargement des annonces...
       </div>
-
-      <!-- CONVOCATION DOYEN -->
-      <div class="annonce-card convocation">
-        <div class="ac-header">
-          <div class="ac-cat-icon" style="background:rgba(245,158,11,0.12);">🏛</div>
-          <div class="ac-meta">
-            <div class="ac-cat-label" style="color:#d97706;">CONVOCATION</div>
-            <div class="ac-title">Réunion du Conseil Pédagogique — Vendredi 24 Juin</div>
-          </div>
-        </div>
-        <div class="ac-body">
-          <div class="ac-text">Le Doyen de la Faculté convoque l'ensemble des enseignants et assistants à une réunion du Conseil Pédagogique. <strong>Présence obligatoire.</strong> Ordre du jour : bilan du semestre 5 et modalités des examens.</div>
-          <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
-            <div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:6px 12px;font-size:11px;color:#92400e;font-weight:600;">📅 Ven. 24 Jan 2025</div>
-            <div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:6px 12px;font-size:11px;color:#92400e;font-weight:600;">🕐 14h00 – 16h00</div>
-            <div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:6px 12px;font-size:11px;color:#92400e;font-weight:600;">📍 Salle A-12</div>
-          </div>
-          <div class="ac-footer">
-            <div class="ac-author">
-              <div class="ac-author-ava" style="background:linear-gradient(135deg,#dc2626,#991b1b);">D</div>
-              <div><div class="ac-author-name">Le Doyen</div></div>
-            </div>
-            <div class="ac-date">Hier · 16:00</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CONVOCATION VICE-DOYEN -->
-      <div class="annonce-card convocation">
-        <div class="ac-header">
-          <div class="ac-cat-icon" style="background:rgba(245,158,11,0.12);">📋</div>
-          <div class="ac-meta">
-            <div class="ac-cat-label" style="color:#d97706;">CONVOCATION</div>
-            <div class="ac-title">Réunion Commission de Recherche — Lundi 27 Jan</div>
-          </div>
-        </div>
-        <div class="ac-body">
-          <div class="ac-text">Le Vice-Doyen convoque les enseignants-chercheurs pour une réunion de la Commission de Recherche. Veuillez préparer un bilan de vos activités de recherche du semestre.</div>
-          <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
-            <div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:6px 12px;font-size:11px;color:#92400e;font-weight:600;">📅 Lun. 27 Jan 2025</div>
-            <div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:6px 12px;font-size:11px;color:#92400e;font-weight:600;">🕐 10h00</div>
-            <div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:6px 12px;font-size:11px;color:#92400e;font-weight:600;">📍 Salle de Conf. B</div>
-          </div>
-          <div class="ac-footer">
-            <div class="ac-author">
-              <div class="ac-author-ava" style="background:linear-gradient(135deg,#7c3aed,#5b21b6);">VD</div>
-              <div><div class="ac-author-name">Le Vice-Doyen</div></div>
-            </div>
-            <div class="ac-date">Hier · 09:15</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- INFO -->
-      <div class="annonce-card">
-        <div class="ac-header">
-          <div class="ac-cat-icon" style="background:rgba(34,197,94,0.12);">📢</div>
-          <div class="ac-meta">
-            <div class="ac-cat-label" style="color:#16a34a;">INFORMATION</div>
-            <div class="ac-title">Dépôt des projets — Plateforme en ligne</div>
-          </div>
-        </div>
-        <div class="ac-body">
-          <div class="ac-text">Le dépôt des projets de fin d'année s'effectuera exclusivement via la plateforme en ligne de la faculté. Aucun envoi par email ne sera accepté. Date limite : <strong>vendredi 30 juin 2026 à 23h59</strong>.</div>
-          <div class="ac-footer">
-            <div class="ac-author">
-              <div class="ac-author-ava" style="background:linear-gradient(135deg,#6366f1,#4f46e5);">MS</div>
-              <div><div class="ac-author-name">DJ. ROLLY · Apparitaire</div></div>
-            </div>
-            <div class="ac-date">20 mai · 10:00</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ACADEMIQUE -->
-      <div class="annonce-card">
-        <div class="ac-header">
-          <div class="ac-cat-icon" style="background:rgba(99,102,241,0.12);">🎓</div>
-          <div class="ac-meta">
-            <div class="ac-cat-label" style="color:#6366f1;">ACADÉMIQUE</div>
-            <div class="ac-title">Résultats du Semestre 2 disponibles</div>
-          </div>
-        </div>
-        <div class="ac-body">
-          <div class="ac-text">Les résultats du semestre 2 sont désormais disponibles sur le portail étudiant. Les étudiants ayant des réclamations disposent de <strong>5 jours ouvrables</strong> pour contacter la scolarité.</div>
-          <div class="ac-footer">
-            <div class="ac-author">
-              <div class="ac-author-ava" style="background:linear-gradient(135deg,#6366f1,#4f46e5);">MS</div>
-              <div><div class="ac-author-name">DJ. ROLLY · Apparitaire</div></div>
-            </div>
-            <div class="ac-date">18 Juin · 14:30</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- INFO 2 -->
-      <div class="annonce-card">
-        <div class="ac-header">
-          <div class="ac-cat-icon" style="background:rgba(34,197,94,0.12);">🏗</div>
-          <div class="ac-meta">
-            <div class="ac-cat-label" style="color:#16a34a;">INFORMATION</div>
-            <div class="ac-title">Fermeture de la bibliothèque — Travaux</div>
-          </div>
-        </div>
-        <div class="ac-body">
-          <div class="ac-text">La salle de machine sera fermée du <strong>22 au 24 juillet 2025</strong> pour travaux de rénovation.</div>
-          <div class="ac-footer">
-            <div class="ac-author">
-              <div class="ac-author-ava" style="background:linear-gradient(135deg,#6366f1,#4f46e5);">MS</div>
-              <div><div class="ac-author-name">DJ. ROLLY · Apparitaire</div></div>
-            </div>
-            <div class="ac-date">17 Jan · 08:00</div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 </div>
+
 
 <!-- COMPOSE MODAL -->
 <div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
