@@ -124,7 +124,7 @@
 
     <div class="divider">ou</div>
     <div class="register-link">
-      Première connexion ? <a href="contact_admin.php">Contactez l'administration</a>
+      Première connexion ? <a href="register.php">Inscription (Etudiant)</a> ou <a href="contact_admin.php">Contactez l'administration</a>
     </div>
   </div>
 </div>

@@ -9,6 +9,22 @@ class UserRepository
 {
     private PDO $db;
 
+    private function getRoleIdByNameInternal(string $roleNom): ?int
+    {
+        // RoleService::normalize() gère surtout les accents et espaces => tiret.
+        // Ici on s'appuie sur la même normalisation pour matcher la valeur.
+        $normalized = \App\Services\RoleService::normalize($roleNom);
+
+        $stmt = $this->db->prepare('SELECT id FROM roles WHERE nom = :nom OR nom = :nom2 LIMIT 1');
+        $stmt->execute([
+            'nom' => $normalized,
+            'nom2' => $roleNom,
+        ]);
+        $row = $stmt->fetch();
+        return $row ? (int)$row['id'] : null;
+    }
+
+
     public function __construct()
     {
         $this->db = Database::getInstance();
@@ -47,6 +63,12 @@ class UserRepository
             'role_id' => $data['role_id'],
         ]);
     }
+
+    public function getRoleIdByName(string $roleNom): ?int
+    {
+        return $this->getRoleIdByNameInternal($roleNom);
+    }
+
 
     public function updatePasswordByEmail(string $email, string $password): bool
     {

@@ -238,6 +238,7 @@ sendPrivMsg=async function(){
 window.addEventListener('load',()=>openViceDoyenPrivateChat());
 </script>
 <script src="assets/js/dashboard_doyen_leftmenu_dynamic.js"></script>
+<script src="assets/js/dashboard_vicedoyen_dynamic.js"></script>
 <script src="assets/js/dynamic-db.js"></script>
 </body>
 </html>

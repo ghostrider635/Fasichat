@@ -19,6 +19,7 @@ class Router
 
         match ($action) {
             'login' => AuthController::login(),
+            'register' => AuthController::register(),
             'logout' => AuthController::logout(),
             'reset_password' => AuthController::resetPassword(),
             'contact_admin' => AuthController::contactAdmin(),

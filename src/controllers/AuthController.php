@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Core\Database;
 use App\Services\AuthManager;
+
 use App\Services\RoleService;
 use App\Services\SecurityService;
 use App\Services\ValidationService;
@@ -10,6 +11,68 @@ use App\Repositories\UserRepository;
 
 class AuthController
 {
+    public static function register(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: register.php');
+            exit();
+        }
+
+        SecurityService::verifyCsrfToken($_POST['csrf_token'] ?? null);
+
+        $nom = ValidationService::sanitizeString((string)($_POST['nom'] ?? ''));
+        $prenom = ValidationService::sanitizeString((string)($_POST['prenom'] ?? ''));
+        $email = ValidationService::sanitizeEmail((string)($_POST['email'] ?? ''));
+        $password = (string)($_POST['password'] ?? '');
+        $confirm = (string)($_POST['password_confirm'] ?? '');
+        $selectedRole = (string)($_POST['role_selectionne'] ?? '');
+
+        if ($nom === '' || $prenom === '' || $email === '' || $password === '' || $confirm === '' || $selectedRole === '') {
+            header('Location: register.php?error=missing');
+            exit();
+        }
+
+        // Inscription autorisée uniquement pour Etudiant (selon validation demandée)
+        if (RoleService::normalize($selectedRole) !== RoleService::normalize('Etudiant')) {
+            header('Location: contact_admin.php');
+            exit();
+        }
+
+        if (strlen($password) < 12 || $password !== $confirm) {
+            header('Location: register.php?error=password');
+            exit();
+        }
+
+        $repository = new UserRepository();
+        $existing = $repository->findByEmail($email);
+        if ($existing) {
+            header('Location: register.php?error=exists');
+            exit();
+        }
+
+        $roleId = $repository->getRoleIdByName($selectedRole);
+        if ($roleId === null) {
+            header('Location: register.php?error=role');
+            exit();
+        }
+
+        $ok = $repository->create([
+            'nom' => $nom,
+            'prenom' => $prenom,
+            'email' => $email,
+            'password' => $password,
+            'role_id' => $roleId,
+        ]);
+
+        if (!$ok) {
+            header('Location: register.php?error=invalid');
+            exit();
+        }
+
+        header('Location: register.php?created=1');
+        exit();
+    }
+
     public static function login(): void
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
